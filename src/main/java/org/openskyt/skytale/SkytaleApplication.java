@@ -31,14 +31,22 @@ public class SkytaleApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         User user1 = new User("Dan");
+        User user2 = new User("Marek");
         Message message1 = new Message("Ahoj");
+        Message message2 = new Message("Cau");
         Chatroom chatroom1 = new Chatroom("xChat");
 
         userRepository.save(user1);
+        userRepository.save(user2);
+        chatroom1.setUser(user1);
         chatroomRepository.save(chatroom1);
+
         message1.setUser(user1);
+        message2.setUser(user2);
         message1.setChatroom(chatroom1);
+        message2.setChatroom(chatroom1);
         messageRepository.save(message1);
+        messageRepository.save(message2);
 
 
 

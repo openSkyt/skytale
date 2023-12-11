@@ -28,6 +28,9 @@ public class Chatroom {
     private List<Message> messagesInRoom = new ArrayList<>();
 
 
+    @ManyToOne
+    private User user;
+
     public Chatroom(String chatroom) {
         this.name = chatroom;
     }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,6 +25,9 @@ public class User {
     private List<Message> message;
 
     private String name;
+
+    @OneToMany(mappedBy = "user")
+    private List<Chatroom> chatroomCreatedByUser = new ArrayList<>();
 
     public User(String name) {
         this.name = name;
