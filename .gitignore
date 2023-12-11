@@ -5,6 +5,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+## mac things
+
+.DS_Store
+
 ### STS ###
 .apt_generated
 .classpath
