@@ -4,12 +4,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
 @Configuration
 public class SecurityConfig {
@@ -22,15 +25,27 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .authorizeHttpRequests(request -> {
-                    request.requestMatchers("/login" , "/", "/stylesheets/**", "/scripts/**").permitAll();
-                    request.anyRequest().authenticated();
-                })
-                .formLogin(Customizer.withDefaults())
-                .httpBasic(Customizer.withDefaults())
-                .build();
+//        return http
+//
+//
+//                .authorizeHttpRequests(request -> {
+//                    request.requestMatchers("/login" , "/", "/stylesheets/**", "/scripts/**", "/h2-console/**", "/**").permitAll();
+//                    request.anyRequest().permitAll();
+//                })
+//                .formLogin(Customizer.withDefaults())
+//                .httpBasic(Customizer.withDefaults())
+//                .build();
         //TODO customize
+        http.csrf(AbstractHttpConfigurer::disable);
+        http.authorizeHttpRequests(r -> {
+            r.requestMatchers("/h2-console/**").permitAll();
+            r.anyRequest().authenticated();
+        });
+        http.sessionManagement(sessionAuthenticationStrategy ->
+                sessionAuthenticationStrategy.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http.headers(headers -> headers
+                .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
+        return http.build();
     }
 
     @Bean
