@@ -1,7 +1,9 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 * {
-    font-size: 1.5rem;
+    font-size: 100%;
+    font-family: 'Inter', sans-serif;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -22,13 +24,14 @@ a {
     align-items: center;
     height: 10%;
     padding: 0 2rem;
+    font-size: 1.5rem;
 }
 
 .chat {
     overflow-x: hidden;
     overflow-y: auto;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     background: linear-gradient(45deg, rgba(65, 88, 208, 0.2), rgba(200, 80, 192, 0.2));
     height: 80%;
     padding: 0 2rem;
@@ -44,6 +47,8 @@ a {
     flex-grow: 1;
     padding: 0.5rem;
     font-size: 1rem;
+    border: 1px solid;
+    border-radius: 0.3rem;
 }
 
 .submitButton {
@@ -57,4 +62,53 @@ a {
     gap: 1rem;
     flex-grow: 1;
     padding: 0 2rem;
+}
+
+.chatCard {
+    width: 55%;
+    margin: 0.75rem 0;
+}
+
+.chatCardBackgroundAnotherUser {
+    background-color: rgb(252, 252, 252);
+}
+
+.chatCardBackgroundMe {
+    background-color: rgba(28, 90, 183, 0.75);
+    color: #eeeeee;
+}
+
+.chatCardBackground {
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.chatCardText {
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.chatCardDateTime {
+    font-size: 0.7rem;
+    font-style: italic;
+    font-weight: 300;
+}
+
+.chatCardDateTimeContainer {
+    text-align: right;
+}
+
+.chatCardUserContainer {
+    margin-bottom: 0.25rem;
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 300;
+}
+
+.card-align-left {
+    align-self: flex-start;
+}
+
+.card-align-right {
+    align-self: flex-end;
 }

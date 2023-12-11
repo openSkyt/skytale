@@ -1,60 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @font-face {
     font-family: "Virgil";
     src: url(Virgil.woff2);
-}
-
-body {
-    background: linear-gradient(45deg, rgb(65, 88, 208), rgb(200, 80, 192));
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Virgil;
-    font-size: 1.4rem;
+    font-family: Virgil, sans-serif;
+    font-size: 100%;
+}
+
+body {
+    background: linear-gradient(45deg, rgb(65, 88, 208), rgb(200, 80, 192));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
 }
 
 .loginTitle {
-    color: white;
-    font-size: 3.5rem;
+    color: #f7f7f7;
+    font-size: 5rem;
     margin-bottom: 2.5rem;
+    margin-top: 8rem;
     text-align: center;
 }
 
 .loginForm {
     margin: 0 auto;
-    max-width: 15rem;
+    max-width: 20rem;
 }
 
 .loginFormComponents {
-    gap: 1rem;
+    gap: 1.5rem;
     display: flex;
     flex-direction: column;
 }
 
 .textLoginFormComponents {
-    font-family: sans-serif;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
     border: none;
-    background-color: #f3f3f3;
-    padding: 0.25rem;
+    background-color: #ededed;
+    padding: 0.5rem;
     border-radius: 0.45rem;
 }
 
 .textLoginFormComponents::placeholder {
     font-size: 1.4rem;
-    font-family: Virgil;
+    font-family: Virgil, sans-serif;
 }
 
 .buttonLoginFormComponent {
-    background-color: #424242;
+    font-size: 1.2rem;
+    /*background-color: #424242;*/
+    background: linear-gradient(5deg, rgb(42, 42, 42), rgb(77, 77, 77));
     color: white;
-    padding: 0.25rem;
+    padding: 0.5rem;
     border: none;
     border-radius: 0.45rem;
     cursor: pointer;
