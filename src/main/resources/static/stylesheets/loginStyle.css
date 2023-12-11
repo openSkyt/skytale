@@ -3,7 +3,6 @@
     src: url(Virgil.woff2);
 }
 
-
 body {
     background: linear-gradient(45deg, rgb(65, 88, 208), rgb(200, 80, 192));
     display: flex;
@@ -12,7 +11,6 @@ body {
     align-items: center;
     height: 100vh;
 }
-
 
 * {
     margin: 0;
@@ -47,7 +45,6 @@ body {
     padding: 0.25rem;
     border-radius: 0.45rem;
 }
-
 
 .textLoginFormComponents::placeholder {
     font-size: 1.4rem;
