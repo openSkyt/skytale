@@ -35,5 +35,15 @@ public class Chatroom {
         this.name = chatroom;
     }
 
+    @ManyToMany
+    @JoinTable(
+            name = "UsersInChatroom",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "chatroom_id")
+    )
+
+    private List<User> listOfUsersInRoom = new ArrayList<>();
+
+    //TODO - zkontrolovat vazbu ManyToMany mezi userem a chatroomem
     //TODO - konstruktory dodělat?
 }

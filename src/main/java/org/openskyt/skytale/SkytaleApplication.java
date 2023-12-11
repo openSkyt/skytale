@@ -39,6 +39,7 @@ public class SkytaleApplication implements CommandLineRunner {
         userRepository.save(user1);
         userRepository.save(user2);
         chatroom1.setUser(user1);
+        chatroom1.setUser(user2);
         chatroomRepository.save(chatroom1);
 
         message1.setUser(user1);
