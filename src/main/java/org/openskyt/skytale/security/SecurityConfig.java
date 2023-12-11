@@ -24,10 +24,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(request -> {
-                    request.requestMatchers("/login" , "/", "/stylesheets/**", "/scripts/**").permitAll();
+                    request.requestMatchers("/login" , "/stylesheets/**", "/scripts/**").permitAll();
                     request.anyRequest().authenticated();
                 })
-                .formLogin(Customizer.withDefaults())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll()
+                )
                 .httpBasic(Customizer.withDefaults())
                 .build();
         //TODO customize

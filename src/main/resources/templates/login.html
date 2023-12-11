@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head xmlns:th="https://www.thymeleaf.org/">
+    <link rel="stylesheet" href="/stylesheets/loginStyle.css">
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8">
+    <title>Login plz </title>
+</head>
+<body>
+
+<h1 class="loginTitle">Skytale</h1>
+
+<div class="loginForm">
+    <form th:action="@{/login}" method="post">
+        <div class="loginFormComponents">
+            <input class="textLoginFormComponents" name="username" placeholder="username"/>
+            <input class="textLoginFormComponents" type="password" name="password" placeholder="password"/>
+            <input class="buttonLoginFormComponent" type="submit" value="login"/>
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>
