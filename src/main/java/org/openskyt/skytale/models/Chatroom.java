@@ -24,7 +24,7 @@ public class Chatroom {
 
 
 
-    @OneToMany
+    @OneToMany(mappedBy = "chatroom")
     private List<Message> messagesInRoom = new ArrayList<>();
 
 
