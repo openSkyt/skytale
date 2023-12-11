@@ -28,4 +28,9 @@ public class Chatroom {
     private List<Message> messagesInRoom = new ArrayList<>();
 
 
+    public Chatroom(String chatroom) {
+        this.name = chatroom;
+    }
+
+    //TODO - konstruktory dodělat?
 }

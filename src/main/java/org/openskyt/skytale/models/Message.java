@@ -22,6 +22,11 @@ public class Message {
     private Chatroom chatroom;
 
     private String text;
+
+    public Message(String message) {
+        this.text = message;
+    }
     //todo - timestamp
+    //TODO - konstruktory dodělat?
 
 }
