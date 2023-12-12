@@ -57,4 +57,9 @@ public class WebController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/sseIndex")
+    public String getSseIndexPage() {
+        return "sse-index";
+    }
 }

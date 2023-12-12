@@ -32,7 +32,7 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .authorizeHttpRequests(r -> {
-                    r.requestMatchers("/h2-console/**", "/stylesheets/**", "/scripts/**").permitAll();
+                    r.requestMatchers("/h2-console/**", "/stylesheets/**", "/scripts/**", "/sse").permitAll();
                     r.requestMatchers("/login").permitAll();
                     r.anyRequest().authenticated();
                 })
