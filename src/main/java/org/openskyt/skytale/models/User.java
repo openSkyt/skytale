@@ -21,23 +21,23 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
+    private String name;
+    private String password;
 
     @OneToMany(mappedBy = "user") //TODO - Cascade?
     private List<Message> message;
 
-    private String name;
-
     @OneToMany(mappedBy = "user")
     private List<Chatroom> chatroomCreatedByUser = new ArrayList<>();
-
-
 
     @ManyToMany(mappedBy = "listOfUsersInRoom")
     private List<Chatroom> allChatroomsWhereUserParticipats = new ArrayList<>();
 
 
-    public User(String name) {
+
+    public User(String name, String password) {
         this.name = name;
+        this.password = password;
     }
     //TODO - konstruktory dodělat?
 }

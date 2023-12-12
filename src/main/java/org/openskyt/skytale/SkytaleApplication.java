@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class SkytaleApplication implements CommandLineRunner {
@@ -27,11 +28,13 @@ public class SkytaleApplication implements CommandLineRunner {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
-        User user1 = new User("Dan");
-        User user2 = new User("Marek");
+        User user1 = new User("Dan", passwordEncoder.encode("1234"));
+        User user2 = new User("Marek",passwordEncoder.encode("1234"));
         Message message1 = new Message("Ahoj");
         Message message2 = new Message("Cau");
         Chatroom chatroom1 = new Chatroom("xChat");
