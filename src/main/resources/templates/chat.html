@@ -13,6 +13,7 @@
             <a href="/logout">Logout</a>
         </div>
         <div id="chat" class="chat">
+
             <div th:each="message : ${messages}" th:attr="class=${message.getUser().getName() == loggedUserName ? 'chatCard card-align-right' : 'chatCard card-align-left'}">
                 <div th:if="${message.getUser().getName() != loggedUserName}" class="chatCardUserContainer">
                     <span class="chatCardUserText" th:text="${message.getUser().getName()}"></span>
@@ -35,5 +36,20 @@
             </form>
         </div>
     </div>
+
+    <script>
+        const eventSource = new EventSource("/sse");
+
+        eventSource.onmessage = (event) => {
+            const div = document.createElement("div");
+            div.textContent = `Messages received: ${event.data}`;
+            document.getElementById("chat").appendChild(div);
+        };
+
+        eventSource.onerror = (error) => {
+            console.error("Error occurred:", error);
+            eventSource.close();
+        };
+    </script>
 </body>
 </html>

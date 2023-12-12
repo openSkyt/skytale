@@ -1,7 +1,9 @@
 package org.openskyt.skytale.service;
 
-import org.openskyt.skytale.models.Message;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.openskyt.skytale.dto.MessageDto;
 import org.openskyt.skytale.repositories.MessageRepository;
+import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -29,9 +31,13 @@ public class SseService {
     public void sendEvents() {
         for (SseEmitter emitter : emitters) {
             try {
-                emitter.send(messageRepository.findAll().stream()
-                        .map(Message::getText)
-                        .collect(Collectors.joining(", ")));
+                ObjectMapper objectMapper = new ObjectMapper();
+                List<MessageDto> dtoMessages = messageRepository.findAll().stream()
+                        .map(x -> new MessageDto(x.getUser().getName(), x.getText()))
+                        .collect(Collectors.toList());
+
+                emitter.send(objectMapper.writeValueAsString(dtoMessages), MediaType.APPLICATION_JSON);
+                //emitter.send("{\"name\":\"John\", \"age\":30, \"car\":null}", MediaType.APPLICATION_JSON);
             } catch (IOException e) {
                 emitter.complete();
                 emitters.remove(emitter);
