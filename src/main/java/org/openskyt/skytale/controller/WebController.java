@@ -1,11 +1,13 @@
 package org.openskyt.skytale.controller;
 
 import lombok.AllArgsConstructor;
+import org.openskyt.skytale.dto.MessageDto;
 import org.openskyt.skytale.models.Chatroom;
 import org.openskyt.skytale.models.Message;
 import org.openskyt.skytale.repositories.ChatroomRepository;
 import org.openskyt.skytale.repositories.MessageRepository;
 import org.openskyt.skytale.repositories.UserRepository;
+import org.openskyt.skytale.service.SseService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,7 @@ public class WebController {
     private ChatroomRepository chatroomRepository;
     private MessageRepository messageRepository;
     private UserRepository userRepository;
+    private SseService sseService;
 
     @GetMapping("/")
     public String homePage(Model model) {
@@ -54,12 +57,8 @@ public class WebController {
         m.setUser(userRepository.findByName(currentPrincipalName).orElseThrow());
 
         messageRepository.save(m);
+        sseService.sendMessageEvent(new MessageDto(m.getUser().getName(), m.getText()));
 
         return "redirect:/";
-    }
-
-    @GetMapping("/sseIndex")
-    public String getSseIndexPage() {
-        return "sse-index";
     }
 }

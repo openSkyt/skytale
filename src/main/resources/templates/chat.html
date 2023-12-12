@@ -28,6 +28,22 @@
                 </div>
             </div>
 
+            <template id="eventMessage">
+                <div class="chatCard card-align-left">
+                    <div class="chatCardUserContainer">
+                        <span class="chatCardUserText"></span>
+                    </div>
+                    <div class="chatCardBackground chatCardBackgroundAnotherUser">
+                        <div class="chatCardTextContainer">
+                            <span class="chatCardText"></span>
+                        </div>
+                        <div class="chatCardDateTimeContainer">
+                            <span class="chatCardDateTime">13.12.2023 03:15</span>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
         </div>
         <div class="actionBar">
             <form th:action="@{/addMessage}" method="post" class="actionBarForm">
@@ -41,9 +57,13 @@
         const eventSource = new EventSource("/sse");
 
         eventSource.onmessage = (event) => {
-            const div = document.createElement("div");
-            div.textContent = `Messages received: ${event.data}`;
-            document.getElementById("chat").appendChild(div);
+            const receivedMessage = JSON.parse(event.data);
+
+            const template = document.querySelector("#eventMessage");
+            const clone = template.content.cloneNode(true);
+            clone.querySelector(".chatCardUserText").textContent = receivedMessage.msgUserName;
+            clone.querySelector(".chatCardText").textContent = receivedMessage.msgText;
+            document.querySelector("#chat").prepend(clone);
         };
 
         eventSource.onerror = (error) => {
