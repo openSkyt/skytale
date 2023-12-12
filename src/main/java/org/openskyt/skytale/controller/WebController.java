@@ -3,11 +3,13 @@ package org.openskyt.skytale.controller;
 import lombok.AllArgsConstructor;
 import org.openskyt.skytale.models.Chatroom;
 import org.openskyt.skytale.models.Message;
+import org.openskyt.skytale.models.User;
 import org.openskyt.skytale.repositories.ChatroomRepository;
 import org.openskyt.skytale.repositories.MessageRepository;
 import org.openskyt.skytale.repositories.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ public class WebController {
     private ChatroomRepository chatroomRepository;
     private MessageRepository messageRepository;
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
     public String homePage(Model model) {
@@ -57,4 +60,16 @@ public class WebController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/register")
+    public String newUser(){
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String newUserPOST(String username, String password){
+        userRepository.save(new User(username, passwordEncoder.encode(password)));
+        return "redirect:/";
+    }
+
 }

@@ -5,14 +5,30 @@
     <meta name="viewport" content="width=device-width"/>
     <meta charset="UTF-8">
     <title>Chat</title>
+
+    <script>
+        let isTextModified = false;
+
+        // Funkce, která se zavolá, když uživatel začne psát
+        // TODO get it better working with thymeleaf? (maybe with th:attr)
+        function onTextChange() {
+            isTextModified = true;
+        }
+
+        setTimeout(function() {
+            if (!isTextModified) {
+                location.reload();
+            }
+        }, 5000);
+    </script>
 </head>
-<body >
+<body>
     <div class="wrapper">
         <div class="navbar">
             <a href="#">Notifikace</a>
             <a href="/logout">Logout</a>
         </div>
-        <div id="chat" class="chat">
+        <div class="chat" id="chat">
             <div th:each="message : ${messages}" th:attr="class=${message.getUser().getName() == loggedUserName ? 'chatCard card-align-right' : 'chatCard card-align-left'}">
                 <div th:if="${message.getUser().getName() != loggedUserName}" class="chatCardUserContainer">
                     <span class="chatCardUserText" th:text="${message.getUser().getName()}"></span>
@@ -30,7 +46,7 @@
         </div>
         <div class="actionBar">
             <form th:action="@{/addMessage}" method="post" class="actionBarForm">
-                <input class="actionBarTextField" type="text" name="message">
+                <input class="actionBarTextField" type="text" name="message" oninput="onTextChange()">
                 <button class="submitButton" type="submit" name="sendMessage"><i class="bi bi-send-fill"></i></button>
             </form>
         </div>
