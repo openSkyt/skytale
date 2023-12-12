@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.Optional;
 
@@ -37,13 +38,17 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         return http
+                .logout(logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutSuccessUrl("/login?logout")
+                )
                 .formLogin(form -> form
+                        .loginPage("/login")
                         .defaultSuccessUrl("/")
-                        .permitAll()
                 )
                 .authorizeHttpRequests(r -> {
-                    r.requestMatchers("/stylesheets/**", "/scripts/**", "/login", "/register").permitAll();
-                    r.anyRequest().authenticated();
+                        r.requestMatchers("/stylesheets/**", "/scripts/**", "/login", "/register").permitAll();
+                        r.anyRequest().authenticated();
                 })
                 .build();
     }
@@ -54,7 +59,8 @@ public class SecurityConfig {
         return username -> {
             Optional<org.openskyt.skytale.models.User> user = userRepo.findByName(username);
             if (user.isPresent()) {
-                return User.withUsername(username)
+                return User
+                        .withUsername(username)
                         .password(user.get().getPassword())
                         .roles("USER")
                         .build();
