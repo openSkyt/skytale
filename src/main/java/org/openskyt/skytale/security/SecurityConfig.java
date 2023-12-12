@@ -76,8 +76,8 @@ public class SecurityConfig {
 
         UserDetails MarekZ = User
                 .builder()
-                .username("MarekZ")
-                .password(passwordEncoder().encode("kokot"))
+                .username("admin")
+                .password(passwordEncoder().encode("admin"))
                 .authorities("admin")
                 .build();
 
