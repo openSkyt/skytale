@@ -24,14 +24,16 @@ public class User {
     private String name;
     private String password;
 
+    // TODO: add timestamp
+
     @OneToMany(mappedBy = "user") //TODO - Cascade?
     private List<Message> message;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "userOwnerOfChatroom")
     private List<Chatroom> chatroomCreatedByUser = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "listOfUsersInRoom")
-    private List<Chatroom> allChatroomsWhereUserParticipats = new ArrayList<>();
+    @ManyToMany(mappedBy = "participants")
+    private List<Chatroom> chatrooms = new ArrayList<>();
 
 
 
