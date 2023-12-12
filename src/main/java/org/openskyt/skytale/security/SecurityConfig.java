@@ -22,34 +22,27 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        return http
-//
-//
-//                .authorizeHttpRequests(request -> {
-//                    request.requestMatchers("/login" , "/", "/stylesheets/**", "/scripts/**", "/h2-console/**", "/**").permitAll();
-//                    request.anyRequest().permitAll();
-//                })
-//                .formLogin(Customizer.withDefaults())
-//                .httpBasic(Customizer.withDefaults())
-//                .build();
-        //TODO customize
-        http.csrf(AbstractHttpConfigurer::disable);
-        http.authorizeHttpRequests(r -> {
-            r.requestMatchers("/h2-console/**").permitAll();
-            r.anyRequest().authenticated();
-        });
-        http.sessionManagement(sessionAuthenticationStrategy ->
-                sessionAuthenticationStrategy.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.headers(headers -> headers
-                .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
-        return http.build();
+
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
+                .formLogin(Customizer.withDefaults())
+                .authorizeHttpRequests(r -> {
+                    r.requestMatchers("/h2-console/**").permitAll();
+                    r.requestMatchers("/login").permitAll();
+                    r.anyRequest().authenticated();
+                })
+                .sessionManagement(sessionAuthenticationStrategy ->
+                        sessionAuthenticationStrategy.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+                .headers(headers -> headers
+                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+                .build();
     }
 
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
+
         UserDetails Pavel = User
                 .builder()
                 .username("Pavel")
