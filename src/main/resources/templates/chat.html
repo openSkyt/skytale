@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head xmlns:th="https://www.thymeleaf.org/">
+    <link rel="stylesheet" href="/stylesheets/chatStyle.css">
+    <meta name="viewport" content="width=device-width"/>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="navbar">
+            <a href="#">Notifikace</a>
+            <a href="/logout">Logout</a>
+        </div>
+        <div class="chat">
+            <div class="chatCard card-align-left">
+                <div class="chatCardUserContainer">
+                    <span class="chatCardUserText">Marek Lochman</span>
+                </div>
+                <div class="chatCardBackground chatCardBackgroundAnotherUser">
+                    <div class="chatCardTextContainer">
+                        <span class="chatCardText">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean fermentum risus id tortor. Donec quis nibh at felis congue commodo.</span>
+                    </div>
+                    <div class="chatCardDateTimeContainer">
+                        <span class="chatCardDateTime">11/12/2023 20:49</span>
+                    </div>
+                </div>
+            </div>
+            <div class="chatCard card-align-right">
+                <div class="chatCardBackground chatCardBackgroundMe">
+                    <div class="chatCardTextContainer">
+                        <span class="chatCardText">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean fermentum risus id tortor. Donec quis nibh at felis congue commodo.</span>
+                    </div>
+                    <div class="chatCardDateTimeContainer">
+                        <span class="chatCardDateTime">11/12/2023 20:49</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actionBar">
+            <form class="actionBarForm">
+                <input class="actionBarTextField" type="text" name="message">
+                <button class="submitButton" type="submit" name="sendMessage"><i class="bi bi-send-fill"></i></button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

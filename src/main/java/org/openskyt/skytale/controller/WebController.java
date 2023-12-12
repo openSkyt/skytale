@@ -8,8 +8,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class WebController {
 
     @GetMapping("/")
-    @ResponseBody
     public String homePage() {
-        return "homePage";
+        return "chat";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/fail")
+    @ResponseBody
+    public String fail() {
+        return "fail";
     }
 }

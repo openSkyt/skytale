@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@font-face {
+    font-family: "Virgil";
+    src: url(Virgil.woff2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Virgil, sans-serif;
+    font-size: 100%;
+}
+
+body {
+    background: linear-gradient(45deg, rgb(65, 88, 208), rgb(200, 80, 192));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+}
+
+.loginTitle {
+    color: #f7f7f7;
+    font-size: 5rem;
+    margin-bottom: 2.5rem;
+    margin-top: 8rem;
+    text-align: center;
+}
+
+.loginForm {
+    margin: 0 auto;
+    max-width: 20rem;
+}
+
+.loginFormComponents {
+    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.textLoginFormComponents {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    border: none;
+    background-color: #ededed;
+    padding: 0.5rem;
+    border-radius: 0.45rem;
+}
+
+.textLoginFormComponents::placeholder {
+    font-size: 1.4rem;
+    font-family: Virgil, sans-serif;
+}
+
+.buttonLoginFormComponent {
+    font-size: 1.2rem;
+    /*background-color: #424242;*/
+    background: linear-gradient(5deg, rgb(42, 42, 42), rgb(77, 77, 77));
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.45rem;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.buttonLoginFormComponent:hover {
+    background-color: #444444;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}

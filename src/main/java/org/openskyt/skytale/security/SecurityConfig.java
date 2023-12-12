@@ -27,9 +27,13 @@ public class SecurityConfig {
 
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .formLogin(Customizer.withDefaults())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/")
+                        .permitAll()
+                )
                 .authorizeHttpRequests(r -> {
-                    r.requestMatchers("/h2-console/**").permitAll();
+                    r.requestMatchers("/h2-console/**", "/stylesheets/**", "/scripts/**").permitAll();
                     r.requestMatchers("/login").permitAll();
                     r.anyRequest().authenticated();
                 })
