@@ -31,7 +31,7 @@ a {
     overflow-x: hidden;
     overflow-y: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     background: linear-gradient(45deg, rgba(65, 88, 208, 0.2), rgba(200, 80, 192, 0.2));
     height: 80%;
     padding: 0 2rem;
