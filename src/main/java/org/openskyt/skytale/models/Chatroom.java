@@ -22,28 +22,16 @@ public class Chatroom {
     private Long id;
     private String name;
 
-
-
     @OneToMany(mappedBy = "chatroom")
     private List<Message> messagesInRoom = new ArrayList<>();
 
-
     @ManyToOne
-    private User user;
+    private User OwnerOfChatroom;
+
+    @ManyToMany
+    private List<User> participants = new ArrayList<>();
 
     public Chatroom(String chatroom) {
         this.name = chatroom;
     }
-
-    @ManyToMany
-    @JoinTable(
-            name = "UsersInChatroom",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "chatroom_id")
-    )
-
-    private List<User> listOfUsersInRoom = new ArrayList<>();
-
-    //TODO - zkontrolovat vazbu ManyToMany mezi userem a chatroomem
-    //TODO - konstruktory dodělat?
 }

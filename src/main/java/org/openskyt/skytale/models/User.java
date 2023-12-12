@@ -24,20 +24,17 @@ public class User {
     private String name;
     private String password;
 
-    @OneToMany(mappedBy = "user") //TODO - Cascade?
+    @OneToMany(mappedBy = "user")
     private List<Message> message;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "OwnerOfChatroom")
     private List<Chatroom> chatroomCreatedByUser = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "listOfUsersInRoom")
-    private List<Chatroom> allChatroomsWhereUserParticipats = new ArrayList<>();
-
-
+    @ManyToMany(mappedBy = "participants")
+    private List<Chatroom> chatrooms = new ArrayList<>();
 
     public User(String name, String password) {
         this.name = name;
         this.password = password;
     }
-    //TODO - konstruktory dodělat?
 }
