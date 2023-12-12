@@ -3,6 +3,10 @@ package org.openskyt.skytale.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Entity
 @Getter
 @Setter
@@ -14,6 +18,8 @@ public class Message {
     @Id
     @GeneratedValue
     private Long id;
+    private String text;
+    private Timestamp timeStamp;
 
     @ManyToOne
     private User user;
@@ -21,12 +27,10 @@ public class Message {
     @ManyToOne
     private Chatroom chatroom;
 
-    private String text;
-
     public Message(String message) {
         this.text = message;
+        this.timeStamp = new Timestamp(new Date().getTime());
     }
-    //todo - timestamp
-    //TODO - konstruktory dodělat?
+
 
 }

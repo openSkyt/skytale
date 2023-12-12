@@ -17,9 +17,7 @@ public class SseController {
     @GetMapping(path = "/sse", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public SseEmitter subscribe() {
         SseEmitter emitter = new SseEmitter(Long.MAX_VALUE);
-
         sseService.addEmitter(emitter);
-
         return emitter;
     }
 }

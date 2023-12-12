@@ -1,42 +1,36 @@
 package org.openskyt.skytale;
 
+import lombok.AllArgsConstructor;
 import org.openskyt.skytale.models.Chatroom;
 import org.openskyt.skytale.models.Message;
 import org.openskyt.skytale.models.User;
 import org.openskyt.skytale.repositories.ChatroomRepository;
 import org.openskyt.skytale.repositories.MessageRepository;
 import org.openskyt.skytale.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-@EnableScheduling
+@AllArgsConstructor
 public class SkytaleApplication implements CommandLineRunner {
+
+    private ChatroomRepository chatroomRepository;
+    private MessageRepository messageRepository;
+    private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     public static void main(String[] args) {
         SpringApplication.run(SkytaleApplication.class, args);
     }
 
-    @Autowired
-    private ChatroomRepository chatroomRepository;
-
-    @Autowired
-    private MessageRepository messageRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Override
     public void run(String... args) throws Exception {
-
         User user1 = new User("Dan", passwordEncoder.encode("1234"));
+        User user3ownerOfchat = new User("OWNER of chat", passwordEncoder.encode("1234"));
         User user2 = new User("MarekL",passwordEncoder.encode("1234"));
+        User us3r = new User("admin", passwordEncoder.encode("admin"));
 
         Message message1 = new Message("Ahoj");
         Message message2 = new Message("Cau");
@@ -49,12 +43,15 @@ public class SkytaleApplication implements CommandLineRunner {
         Message message9 = new Message("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Integer malesuada. Aliquam erat volutpat.");
         Chatroom chatroom1 = new Chatroom("xChat");
 
+        //database testing data
+        userRepository.save(us3r);
         userRepository.save(user1);
         userRepository.save(user2);
-        chatroom1.setUser(user1);
-        chatroom1.setUser(user2);
+        userRepository.save(user3ownerOfchat);
+        chatroom1.setOwnerOfChatroom(user3ownerOfchat);
+        chatroom1.getParticipants().add(user1);
+        chatroom1.getParticipants().add(user2);
         chatroomRepository.save(chatroom1);
-
         message1.setUser(user1);
         message2.setUser(user2);
         message3.setUser(user2);
@@ -75,6 +72,8 @@ public class SkytaleApplication implements CommandLineRunner {
         message9.setChatroom(chatroom1);
         messageRepository.save(message1);
         messageRepository.save(message2);
+
+        //database testing data
         messageRepository.save(message3);
         messageRepository.save(message4);
         messageRepository.save(message5);
@@ -83,5 +82,4 @@ public class SkytaleApplication implements CommandLineRunner {
         messageRepository.save(message8);
         messageRepository.save(message9);
     }
-
 }
