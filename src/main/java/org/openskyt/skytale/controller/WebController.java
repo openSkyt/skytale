@@ -69,7 +69,7 @@ public class WebController {
     @PostMapping("/register")
     public String newUserPOST(String username, String password){
         userRepository.save(new User(username, passwordEncoder.encode(password)));
-        return "redirect:/";
+        return "redirect:/login";
     }
 
 }
