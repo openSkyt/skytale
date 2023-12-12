@@ -4,12 +4,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
 @Configuration
 public class SecurityConfig {
@@ -19,25 +22,31 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         return http
-                .authorizeHttpRequests(request -> {
-                    request.requestMatchers("/login" , "/stylesheets/**", "/scripts/**").permitAll();
-                    request.anyRequest().authenticated();
-                })
+                .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .defaultSuccessUrl("/")
                         .permitAll()
                 )
-                .httpBasic(Customizer.withDefaults())
+                .authorizeHttpRequests(r -> {
+                    r.requestMatchers("/h2-console/**", "/stylesheets/**", "/scripts/**").permitAll();
+                    r.requestMatchers("/login").permitAll();
+                    r.anyRequest().authenticated();
+                })
+                .sessionManagement(sessionAuthenticationStrategy ->
+                        sessionAuthenticationStrategy.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+                .headers(headers -> headers
+                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .build();
-        //TODO customize
     }
 
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
+
         UserDetails Pavel = User
                 .builder()
                 .username("Pavel")
