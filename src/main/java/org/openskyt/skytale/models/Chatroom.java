@@ -26,13 +26,12 @@ public class Chatroom {
     private List<Message> messagesInRoom = new ArrayList<>();
 
     @ManyToOne
-    private User userOwnerOfChatroom;
+    private User OwnerOfChatroom;
 
     @ManyToMany
     private List<User> participants = new ArrayList<>();
+
     public Chatroom(String chatroom) {
         this.name = chatroom;
     }
-    //TODO - zkontrolovat vazbu ManyToMany mezi userem a chatroomem
-    //TODO - konstruktory dodělat?
 }

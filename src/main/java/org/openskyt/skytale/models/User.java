@@ -29,7 +29,7 @@ public class User {
     @OneToMany(mappedBy = "user") //TODO - Cascade?
     private List<Message> message;
 
-    @OneToMany(mappedBy = "userOwnerOfChatroom")
+    @OneToMany(mappedBy = "OwnerOfChatroom")
     private List<Chatroom> chatroomCreatedByUser = new ArrayList<>();
 
     @ManyToMany(mappedBy = "participants")
