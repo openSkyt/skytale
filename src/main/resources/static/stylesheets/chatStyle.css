@@ -65,7 +65,8 @@ a {
 }
 
 .chatCard {
-    width: 55%;
+    max-width: 55%;
+    min-width: 20%;
     margin: 0.75rem 0;
 }
 

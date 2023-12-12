@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head xmlns:th="https://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
     <link rel="stylesheet" href="/stylesheets/chatStyle.css">
     <meta name="viewport" content="width=device-width"/>
     <meta charset="UTF-8">
@@ -13,29 +13,21 @@
             <a href="/logout">Logout</a>
         </div>
         <div class="chat">
-            <div class="chatCard card-align-left">
-                <div class="chatCardUserContainer">
-                    <span class="chatCardUserText">Marek Lochman</span>
+
+            <div th:each="message : ${messages}" th:attr="class=${message.getUser().getName() == loggedUserName ? 'chatCard card-align-right' : 'chatCard card-align-left'}">
+                <div th:if="${message.getUser().getName() != loggedUserName}" class="chatCardUserContainer">
+                    <span class="chatCardUserText" th:text="${message.getUser().getName()}"></span>
                 </div>
-                <div class="chatCardBackground chatCardBackgroundAnotherUser">
+                <div th:attr="class=${message.getUser().getName() == loggedUserName ? 'chatCardBackground chatCardBackgroundMe' : 'chatCardBackground chatCardBackgroundAnotherUser'}">
                     <div class="chatCardTextContainer">
-                        <span class="chatCardText">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean fermentum risus id tortor. Donec quis nibh at felis congue commodo.</span>
+                        <span class="chatCardText" th:text="${message.getText()}"></span>
                     </div>
                     <div class="chatCardDateTimeContainer">
-                        <span class="chatCardDateTime">11/12/2023 20:49</span>
+                        <span class="chatCardDateTime">12.12.2023 10:48</span>
                     </div>
                 </div>
             </div>
-            <div class="chatCard card-align-right">
-                <div class="chatCardBackground chatCardBackgroundMe">
-                    <div class="chatCardTextContainer">
-                        <span class="chatCardText">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean fermentum risus id tortor. Donec quis nibh at felis congue commodo.</span>
-                    </div>
-                    <div class="chatCardDateTimeContainer">
-                        <span class="chatCardDateTime">11/12/2023 20:49</span>
-                    </div>
-                </div>
-            </div>
+
         </div>
         <div class="actionBar">
             <form class="actionBarForm">
