@@ -6,14 +6,13 @@
     <meta charset="UTF-8">
     <title>Chat</title>
 </head>
-<body>
+<body >
     <div class="wrapper">
         <div class="navbar">
             <a href="#">Notifikace</a>
             <a href="/logout">Logout</a>
         </div>
-        <div class="chat">
-
+        <div id="chat" class="chat">
             <div th:each="message : ${messages}" th:attr="class=${message.getUser().getName() == loggedUserName ? 'chatCard card-align-right' : 'chatCard card-align-left'}">
                 <div th:if="${message.getUser().getName() != loggedUserName}" class="chatCardUserContainer">
                     <span class="chatCardUserText" th:text="${message.getUser().getName()}"></span>
@@ -30,7 +29,7 @@
 
         </div>
         <div class="actionBar">
-            <form class="actionBarForm">
+            <form th:action="@{/addMessage}" method="post" class="actionBarForm">
                 <input class="actionBarTextField" type="text" name="message">
                 <button class="submitButton" type="submit" name="sendMessage"><i class="bi bi-send-fill"></i></button>
             </form>

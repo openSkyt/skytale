@@ -30,7 +30,7 @@ public class SkytaleApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         User user1 = new User("Dan");
-        User user2 = new User("Marek Lochman");
+        User user2 = new User("MarekL");
         Message message1 = new Message("Ahoj");
         Message message2 = new Message("Cau");
         Message message3 = new Message("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Integer malesuada. Aliquam erat volutpat.");
