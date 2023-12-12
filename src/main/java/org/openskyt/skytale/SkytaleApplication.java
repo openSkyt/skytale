@@ -35,12 +35,9 @@ public class SkytaleApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         User user1 = new User("Dan", passwordEncoder.encode("1234"));
-
-       
         User user3ownerOfchat = new User("OWNER of chat", passwordEncoder.encode("1234"));
-
         User user2 = new User("MarekL",passwordEncoder.encode("1234"));
-
+        User us3r = new User("admin", passwordEncoder.encode("admin"));
 
         Message message1 = new Message("Ahoj");
         Message message2 = new Message("Cau");
@@ -54,6 +51,7 @@ public class SkytaleApplication implements CommandLineRunner {
         Chatroom chatroom1 = new Chatroom("xChat");
 
         //database testing data
+        userRepository.save(us3r);
         userRepository.save(user1);
         userRepository.save(user2);
         userRepository.save(user3ownerOfchat);

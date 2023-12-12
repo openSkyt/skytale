@@ -59,6 +59,59 @@ public class SecurityConfig implements WebMvcConfigurer {
     }
 
     @Bean
+    public InMemoryUserDetailsManager userDetailsManager() {
+
+        UserDetails Pavel = User
+                .builder()
+                .username("Pavel")
+                .password(passwordEncoder().encode("kokot"))
+                .authorities("admin")
+                .build();
+
+        UserDetails Ramez = User
+                .builder()
+                .username("Ramez")
+                .password(passwordEncoder().encode("kokot"))
+                .authorities("admin")
+                .build();
+
+        UserDetails Dan = User
+                .builder()
+                .username("Dan")
+                .password(passwordEncoder().encode("kokot"))
+                .authorities("admin")
+                .build();
+
+        UserDetails MarekL = User
+                .builder()
+                .username("MarekL")
+                .password(passwordEncoder().encode("kokot"))
+                .authorities("admin")
+                .build();
+
+        UserDetails MarekZ = User
+                .builder()
+                .username("admin")
+                .password(passwordEncoder().encode("admin"))
+                .authorities("admin")
+                .build();
+
+        UserDetails Vasek = User
+                .builder()
+                .username("Vasek")
+                .password(passwordEncoder().encode("kokot"))
+                .authorities("admin")
+                .build();
+
+        UserDetails Ales = User
+                .builder()
+                .username("perryCZ")
+                .password(passwordEncoder().encode("kokot"))
+                .authorities("admin")
+                .build();
+
+        return new InMemoryUserDetailsManager(Pavel, Ramez, Dan, MarekL, MarekZ, Vasek, Ales);
+
     public UserDetailsService userDetailsService(UserRepository userRepo) {
         return username -> {
             Optional<org.openskyt.skytale.models.User> user = userRepo.findByName(username);
