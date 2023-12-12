@@ -48,8 +48,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                         .permitAll()
                 )
                 .authorizeHttpRequests(r -> {
-                    r.requestMatchers("/h2-console/**", "/stylesheets/**", "/scripts/**").permitAll();
-                    r.requestMatchers("/login").permitAll();
+                    r.requestMatchers("/h2-console/**", "/stylesheets/**", "/scripts/**", "/login", "/register").permitAll();
                     r.anyRequest().authenticated();
                 })
                 .sessionManagement(sessionAuthenticationStrategy ->

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <link rel="stylesheet" href="/stylesheets/loginStyle.css">
+    <meta name="viewport" content="width=device-width"/>
+    <meta charset="UTF-8">
+    <title>Register plz </title>
+</head>
+<body>
+    <h1 class="loginTitle">Register to Skytale</h1>
+
+    <div class="loginForm">
+        <form action="/register" method="post">
+            <div class="loginFormComponents">
+                <input class="textLoginFormComponents" name="username" placeholder="username"/>
+                <input class="textLoginFormComponents" type="password" name="password" placeholder="password"/>
+                <input class="buttonLoginFormComponent" type="submit" value="register"/>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
