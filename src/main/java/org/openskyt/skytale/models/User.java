@@ -24,9 +24,7 @@ public class User {
     private String name;
     private String password;
 
-    // TODO: add timestamp
-
-    @OneToMany(mappedBy = "user") //TODO - Cascade?
+    @OneToMany(mappedBy = "user")
     private List<Message> message;
 
     @OneToMany(mappedBy = "OwnerOfChatroom")
@@ -35,11 +33,8 @@ public class User {
     @ManyToMany(mappedBy = "participants")
     private List<Chatroom> chatrooms = new ArrayList<>();
 
-
-
     public User(String name, String password) {
         this.name = name;
         this.password = password;
     }
-    //TODO - konstruktory dodělat?
 }
