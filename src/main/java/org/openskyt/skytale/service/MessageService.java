@@ -24,14 +24,14 @@ public class MessageService {
         this.chatroomRepo = chatroomRepo;
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
 
     public void createMessage(MessageRequestDto dto) {
         Message message = new Message(
-                userRepo.getReferenceById(dto.getAuthorId()),
-                chatroomRepo.getReferenceById(dto.getRoomId()),
-                dto.getMessage()
+                userRepo.getReferenceById(dto.authorId()),
+                chatroomRepo.getReferenceById(dto.roomId()),
+                dto.message()
         );
+        messageRepo.save(message);
     }
 
     public List<Message> getAllByAuthorId(Long userId) {

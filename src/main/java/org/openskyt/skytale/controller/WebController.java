@@ -25,21 +25,11 @@ public class WebController {
 
     @GetMapping("/{idOfChatroom}")
     public String chatroom(@PathVariable Long idOfChatroom, Model model) {
-        // TODO find chatroom by ID
         Chatroom chatroom = chatroomService.getById(idOfChatroom);
         model.addAttribute("chatroom", chatroom);
-        //Optional<Chatroom> chatroomOpt = chatroomRepository.findByName("xChat");
-        //Chatroom chatroom = chatroomOpt.orElseThrow();
+        model.addAttribute("messages", chatroom.getMessagesInRoom().reversed());
+        model.addAttribute("loggedUsername", securityService.getLoggedInUser().getName());
 
-        // TODO get messages from chatroom and add them to model
-        //List<Message> messages = chatroom.getMessagesInRoom();
-        //model.addAttribute("messages", messages.reversed());
-
-        // TODO get name of loggedInUser and add it to model
-        //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        //String currentPrincipalName = authentication.getName();
-        //model.addAttribute("loggedUserName", currentPrincipalName);
-
-        return "mainPage";
+        return "chat";
     }
 }
