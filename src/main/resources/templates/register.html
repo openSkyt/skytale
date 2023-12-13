@@ -9,7 +9,7 @@
 <body>
 <a class="topRightButton" href="login">Login</a>
     <h1 class="loginTitle">Register to Skytale</h1>
-    <p class="errorMessage" th:text="${errors}"></p>
+    <p class="errorMessage" th:unless="${errors.isEmpty()}" th:each="error : ${errors}" th:text="${error}"></p>
 
     <div class="loginForm">
         <form th:action="@{/register}" th:method="POST">
