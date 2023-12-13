@@ -42,10 +42,7 @@ public class WebController {
         return "chat";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+
 
     @PostMapping("/addMessage")
     public String addMessage(String message) {
@@ -61,15 +58,6 @@ public class WebController {
         return "redirect:/";
     }
 
-    @GetMapping("/register")
-    public String newUser(){
-        return "register";
-    }
 
-    @PostMapping("/register")
-    public String newUserPOST(String username, String password){
-        userRepository.save(new User(username, passwordEncoder.encode(password)));
-        return "redirect:/login";
-    }
 
 }
