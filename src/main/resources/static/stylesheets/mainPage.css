@@ -8,7 +8,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Virgil, sans-serif;
+    font-family: Inter, sans-serif;
     font-size: 100%;
 }
 
@@ -16,15 +16,83 @@ body {
     background-color: #fafafa;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+}
+
+main {
+    padding: 0 2rem;
+}
+
+.h1 {
+    color: #f7f7f7;
+    font-size: 1.8rem;
+    font-family: Virgil, sans-serif;
+    text-align: center;
+    flex: 1;
+}
+
+.userName {
+    color: #f7f7f7;
+    font-size: 1.5rem;
+    text-align: right;
+    flex: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    background: linear-gradient(45deg, rgb(65, 88, 208), rgb(200, 80, 192));
+}
+
+header::before {
+    content: '';
+    flex: 1;
+    visibility: hidden;
+}
+
+.chatRoomsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.frame {
+    width: 30rem;
+    height: 20rem;
 }
 
 .chatRoomsSection {
-
+    margin-top: 2rem;
 }
 
-.chatRoomCard {
-    display: inline-block;
+.chatRoomCardTitle {
+    background: linear-gradient(5deg, rgb(42, 42, 42), rgb(65, 65, 65));
+    padding: 0.25rem 1rem;
+    color: #f7f7f7;
+    border-top-right-radius: 0.4rem;
+    border-top-left-radius: 0.4rem;
+}
+
+.topRightButton {
+    text-decoration: none;
+    margin: 0.25rem;
+    position: absolute;
+    top: 0.15rem;
+    left: 1rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    font-size: 1.2rem;
+    background: linear-gradient(5deg, rgb(42, 42, 42), rgb(77, 77, 77));
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.45rem;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    max-width: 6rem;
 }
 
 

@@ -6,16 +6,17 @@
     <link rel="stylesheet" href="/stylesheets/mainPage.css">
 </head>
 <body>
-    <header>
-        <h1>Skytale</h1>
-        <a href="/logout">Logout</a>
+    <header class="header">
+        <h1 class="h1">Skytale</h1>
+        <a class="topRightButton" th:href="@{/logout}">Logout</a>
+        <span class="userName" th:text="${loggedInUser.getName()}"></span>
     </header>
     <main>
         <section class="chatRoomsSection">
             <div class="chatRoomsContainer">
                 <div th:each="chatroom : ${chatrooms}" class="chatRoomCard">
-                    <p th:text="${chatroom.getName()}"></p>
-                    <iframe width="360" height="215" th:src="@{'/' + ${chatroom.getId()}}"></iframe>
+                    <p th:text="${chatroom.getName()}" class="chatRoomCardTitle"></p>
+                    <iframe class="frame" th:src="@{'/' + ${chatroom.getId()}}" scrolling="no"></iframe>
                 </div>
             </div>
         </section>
