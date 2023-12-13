@@ -11,7 +11,7 @@
 <body>
 <a class="topRightButton" href="register">Register</a>
 <h1 class="loginTitle">Skytale</h1>
-<p class="errorMessage" th:text="${error}"></p>
+<p class="errorMessage" th:if="${param.containsKey('error')}" th:text="${error}"></p>
 <div class="loginForm">
     <form th:action="@{/login}" th:method="POST">
             <div class="loginFormComponents">

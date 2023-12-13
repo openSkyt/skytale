@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Controller
@@ -54,6 +53,7 @@ public class WebController {
 
     @GetMapping("/login")
     public String login(Model m, @RequestParam() Map<String, String> param) {
+        m.addAttribute("param", param);
         if (param.containsKey("error")){
             m.addAttribute("error", "Error: Invalid credentials.");
         }
@@ -97,13 +97,16 @@ public class WebController {
                 .map(Optional::get)
                 .toList();
 
-        StringBuilder currentErrors = new StringBuilder();
+
+
+        List<String> errors = new ArrayList<>();
         for (ErrorDTO ed : errorDTOs) {
-            currentErrors.append(ed.error()).append("\n");
+            errors.add(ed.error());
         }
 
-        if (!errorDTOs.isEmpty()) {
-            m.addAttribute("errors", currentErrors.toString());
+
+        if (!errors.isEmpty()) {
+            m.addAttribute("errors", errors);
             return "register";
         }
 
