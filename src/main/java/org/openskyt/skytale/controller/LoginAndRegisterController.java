@@ -62,7 +62,7 @@ public class LoginAndRegisterController {
             m.addAttribute("errors", errors);
             return "register";
         }
-        // TODO refactor this method!
+
         userService.createUser(new RegistrationRequestDto(username.get(), password.get()));
         return "redirect:/login";
     }
