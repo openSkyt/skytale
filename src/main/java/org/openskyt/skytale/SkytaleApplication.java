@@ -1,39 +1,32 @@
 package org.openskyt.skytale;
 
+import lombok.AllArgsConstructor;
 import org.openskyt.skytale.models.Chatroom;
 import org.openskyt.skytale.models.Message;
 import org.openskyt.skytale.models.User;
 import org.openskyt.skytale.repositories.ChatroomRepository;
 import org.openskyt.skytale.repositories.MessageRepository;
 import org.openskyt.skytale.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
+@AllArgsConstructor
 public class SkytaleApplication implements CommandLineRunner {
+
+    private ChatroomRepository chatroomRepository;
+    private MessageRepository messageRepository;
+    private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     public static void main(String[] args) {
         SpringApplication.run(SkytaleApplication.class, args);
     }
 
-    @Autowired
-    private ChatroomRepository chatroomRepository;
-
-    @Autowired
-    private MessageRepository messageRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Override
     public void run(String... args) throws Exception {
-
         User user1 = new User("Dan", passwordEncoder.encode("1234"));
         User user3ownerOfchat = new User("OWNER of chat", passwordEncoder.encode("1234"));
         User user2 = new User("MarekL",passwordEncoder.encode("1234"));
@@ -80,9 +73,7 @@ public class SkytaleApplication implements CommandLineRunner {
         messageRepository.save(message1);
         messageRepository.save(message2);
 
-        //database  testing data
-
-
+        //database testing data
         messageRepository.save(message3);
         messageRepository.save(message4);
         messageRepository.save(message5);
@@ -90,7 +81,5 @@ public class SkytaleApplication implements CommandLineRunner {
         messageRepository.save(message7);
         messageRepository.save(message8);
         messageRepository.save(message9);
-
     }
-
 }

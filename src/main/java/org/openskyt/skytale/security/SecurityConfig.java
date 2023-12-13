@@ -1,7 +1,6 @@
 package org.openskyt.skytale.security;
 
 import org.openskyt.skytale.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,15 +18,6 @@ import java.util.Optional;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-    private final UserRepository userRepo;
-
-    @Autowired
-    public SecurityConfig(UserRepository userRepo) {
-        this.userRepo = userRepo;
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -47,7 +37,7 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/")
                 )
                 .authorizeHttpRequests(r -> {
-                        r.requestMatchers("/stylesheets/**", "/scripts/**", "/login", "/register").permitAll();
+                        r.requestMatchers("/stylesheets/**", "/scripts/**", "/login", "/register", "/sse").permitAll();
                         r.anyRequest().authenticated();
                 })
                 .build();
@@ -69,5 +59,4 @@ public class SecurityConfig {
             }
         };
     }
-
 }

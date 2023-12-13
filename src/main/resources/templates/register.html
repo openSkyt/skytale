@@ -4,13 +4,13 @@
     <link rel="stylesheet" href="/stylesheets/loginStyle.css">
     <meta name="viewport" content="width=device-width"/>
     <meta charset="UTF-8">
-    <title>Register plz </title>
+    <title>Register</title>
 </head>
 <body>
     <h1 class="loginTitle">Register to Skytale</h1>
 
     <div class="loginForm">
-        <form action="/register" method="post">
+        <form th:action="@{/register}" th:method="POST">
             <div class="loginFormComponents">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <input class="textLoginFormComponents" name="username" placeholder="username"/>

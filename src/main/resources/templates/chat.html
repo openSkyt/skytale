@@ -6,11 +6,9 @@
     <meta charset="UTF-8">
     <title>Chat</title>
 
-    <script>
+    <!--<script>
         let isTextModified = false;
 
-        // Funkce, která se zavolá, když uživatel začne psát
-        // TODO get it better working with thymeleaf? (maybe with th:attr)
         function onTextChange() {
             isTextModified = true;
         }
@@ -20,7 +18,7 @@
                 location.reload();
             }
         }, 5000);
-    </script>
+    </script>-->
 </head>
 <body>
     <div class="wrapper">
@@ -42,15 +40,48 @@
                     </div>
                 </div>
             </div>
-
+            <template id="eventMessage">
+                <div class="chatCard card-align-left">
+                    <div class="chatCardUserContainer">
+                        <span class="chatCardUserText"></span>
+                    </div>
+                    <div class="chatCardBackground chatCardBackgroundAnotherUser">
+                        <div class="chatCardTextContainer">
+                            <span class="chatCardText"></span>
+                        </div>
+                        <div class="chatCardDateTimeContainer">
+                            <span class="chatCardDateTime">13.12.2023 03:15</span>
+                        </div>
+                    </div>
+                </div>
+            </template>
         </div>
         <div class="actionBar">
-            <form th:action="@{/addMessage}" method="post" class="actionBarForm">
-                <input class="actionBarTextField" type="text" name="message" oninput="onTextChange()">
+            <form th:action="@{/addMessage}" th:method="POST" class="actionBarForm">
+                <input class="actionBarTextField" type="text" name="message"> <!--oninput="onTextChange()"-->
                 <button class="submitButton" type="submit" name="sendMessage"><i class="bi bi-send-fill"></i></button>
             </form>
         </div>
     </div>
+
+    <script>
+        const eventSource = new EventSource("/sse");
+
+        eventSource.onmessage = (event) => {
+            const receivedMessage = JSON.parse(event.data);
+
+            const template = document.querySelector("#eventMessage");
+            const clone = template.content.cloneNode(true);
+            clone.querySelector(".chatCardUserText").textContent = receivedMessage.msgUserName;
+            clone.querySelector(".chatCardText").textContent = receivedMessage.msgText;
+            document.querySelector("#chat").prepend(clone);
+        };
+
+        eventSource.onerror = (error) => {
+            console.error("Error occurred:", error);
+            eventSource.close();
+        };
+    </script>
     <script>
         function notifyMe() {
             if (!("Notification" in window)) {
@@ -60,23 +91,17 @@
                 // Check whether notification permissions have already been granted;
                 // if so, create a notification
                 const notification = new Notification("Hi there!");
-                // …
             } else if (Notification.permission !== "denied") {
                 // We need to ask the user for permission
                 Notification.requestPermission().then((permission) => {
                     // If the user accepts, let's create a notification
                     if (permission === "granted") {
                         const notification = new Notification("Hi there!");
-                        // …
                     }
                 });
             }
-
-            // At last, if the user has denied notifications, and you
-            // want to be respectful there is no need to bother them anymore.
         }
-        notifyMe()
+        notifyMe();
     </script>
-
 </body>
 </html>
