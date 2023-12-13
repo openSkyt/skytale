@@ -57,10 +57,10 @@ public class WebController {
 
         Message m = new Message(message);
         m.setChatroom(chatroomRepository.findByName("xChat").orElseThrow());
-        m.setUser(userRepository.findByName(currentPrincipalName).orElseThrow());
+        m.setAuthor(userRepository.findByName(currentPrincipalName).orElseThrow());
 
         messageRepository.save(m);
-        sseService.sendMessageEvent(new MessageDto(m.getUser().getName(), m.getText()));
+        sseService.sendMessageEvent(new MessageDto(m.getAuthor().getName(), m.getText()));
 
         return "redirect:/";
     }
