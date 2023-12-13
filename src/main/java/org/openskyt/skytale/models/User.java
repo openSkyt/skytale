@@ -27,7 +27,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Message> message;
 
-    @OneToMany(mappedBy = "OwnerOfChatroom")
+    @OneToMany(mappedBy = "ownerOfChatroom")
     private List<Chatroom> chatroomCreatedByUser = new ArrayList<>();
 
     @ManyToMany(mappedBy = "participants")

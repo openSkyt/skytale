@@ -7,6 +7,7 @@ import org.openskyt.skytale.models.User;
 import org.openskyt.skytale.repositories.ChatroomRepository;
 import org.openskyt.skytale.repositories.MessageRepository;
 import org.openskyt.skytale.repositories.UserRepository;
+import org.openskyt.skytale.service.ChatroomService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,6 +21,8 @@ public class SkytaleApplication implements CommandLineRunner {
     private MessageRepository messageRepository;
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
+
+    private ChatroomService chatroomService;
 
     public static void main(String[] args) {
         SpringApplication.run(SkytaleApplication.class, args);
@@ -81,5 +84,7 @@ public class SkytaleApplication implements CommandLineRunner {
         messageRepository.save(message7);
         messageRepository.save(message8);
         messageRepository.save(message9);
+
+        chatroomService.createRoom(1L, "test");
     }
 }
