@@ -85,6 +85,14 @@ public class SkytaleApplication implements CommandLineRunner {
         messageRepository.save(message8);
         messageRepository.save(message9);
 
-        chatroomService.createRoom(1L, "test");
+        chatroomService.createRoom(1L, "test"); // ID = 2
+        Chatroom room2 = chatroomService.createRoom(2L, "test2");
+        chatroomService.createRoom(2L, "test3");
+
+        chatroomService.addParticipant(2L, 1L);
+        chatroomService.addParticipant(3L, 1L);
+
+        System.out.println(chatroomService.getAll());
+        System.out.println(chatroomService.getByParticipantId(1L));
     }
 }
