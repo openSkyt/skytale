@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 @AllArgsConstructor
 public class WebController {
+
     @GetMapping("/")
     public String index(Model model) {
         // TODO add user to model

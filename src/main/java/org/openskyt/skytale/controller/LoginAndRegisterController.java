@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @AllArgsConstructor
 public class LoginAndRegisterController {
-    private UserService userService;
-
     @GetMapping("/login")
     public String login() {
         return "login";
