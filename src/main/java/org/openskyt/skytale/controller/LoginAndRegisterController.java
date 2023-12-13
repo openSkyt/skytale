@@ -3,6 +3,7 @@ package org.openskyt.skytale.controller;
 import lombok.AllArgsConstructor;
 import org.openskyt.skytale.dto.ErrorDto;
 import org.openskyt.skytale.dto.RegistrationRequestDto;
+import org.openskyt.skytale.models.User;
 import org.openskyt.skytale.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,8 +39,10 @@ public class LoginAndRegisterController {
 
     @PostMapping("/register")
     public String registerPost(Model m, Optional<String> username, Optional<String> password) {
-        /*List<ErrorDto> errorDTOs = Stream.of(
-                        username.filter(u -> userService.getByUsername(u).getName()
+        List<ErrorDto> errorDTOs = Stream.of(
+                        username.filter(u -> userService.getOptionalByUsername(u)
+                                        .map(User::getName)
+                                        .orElse("")
                                         .contains(u))
                                 .map(u -> new ErrorDto("Error: Username already in use")),
                         username.filter(String::isEmpty)
@@ -58,7 +61,7 @@ public class LoginAndRegisterController {
         if (!errors.isEmpty()) {
             m.addAttribute("errors", errors);
             return "register";
-        }*/
+        }
         // TODO refactor this method!
         userService.createUser(new RegistrationRequestDto(username.get(), password.get()));
         return "redirect:/login";
