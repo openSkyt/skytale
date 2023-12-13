@@ -26,12 +26,17 @@ public class Chatroom {
     private List<Message> messagesInRoom = new ArrayList<>();
 
     @ManyToOne
-    private User OwnerOfChatroom;
+    private User ownerOfChatroom;
 
     @ManyToMany
     private List<User> participants = new ArrayList<>();
 
     public Chatroom(String chatroom) {
         this.name = chatroom;
+    }
+
+    public Chatroom(String name, User owner) {
+        this.name = name;
+        this.ownerOfChatroom = owner;
     }
 }
