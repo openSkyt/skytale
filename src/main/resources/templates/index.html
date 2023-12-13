@@ -6,45 +6,19 @@
     <link rel="stylesheet" href="/stylesheets/mainPage.css">
 </head>
 <body>
-<header>
-    <h1>Skytale</h1>
-    <a href="/logout">Logout</a>
-</header>
-
-
-
-<main>
-    <div class="sidebar"></div>
-<!--<section class="flex-chatrooms" th:each="chatroom : ${listOfAllRooms}">-->
-<!--    <div class="chatroomShow"  >-->
-<!--        <iframe width="360" height="215" th:src="@{'/' + chatroom.name}" frameborder="1" allowfullscreen></iframe>-->
-<!--    </div>-->
-<!--    <button id="scrollRight">→</button>-->
-<!--</section>-->
-
-    /<!-- ODO - listing chatrooms, but does not show the content. Přístup byl odepřen-->
-    <section class="flex-chatrooms">
-        <div class="chatrooms-container">
-            <div th:each="chatroom : ${chatrooms}" class="chatroomShow">
-                <p th:text="${chatroom.getName()}"></p>
-                <iframe width="360" height="215" th:src="@{'/login' }" frameborder="1" allowfullscreen></iframe>
+    <header>
+        <h1>Skytale</h1>
+        <a href="/logout">Logout</a>
+    </header>
+    <main>
+        <section class="chatRoomsSection">
+            <div class="chatRoomsContainer">
+                <div th:each="chatroom : ${chatrooms}" class="chatRoomCard">
+                    <p th:text="${chatroom.getName()}"></p>
+                    <iframe width="360" height="215" th:src="@{'/' + ${chatroom.getId()}}"></iframe>
+                </div>
             </div>
-        </div>
-
-        <button id="scrollRight">→</button>
-    </section>
-
-
-
-
-</main>
-
-<footer>
-
-
-</footer>
-
-
-
+        </section>
+    </main>
 </body>
 </html>
