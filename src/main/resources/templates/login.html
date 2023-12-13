@@ -11,8 +11,9 @@
 <body>
 <a class="topRightButton" href="register">Register</a>
 <h1 class="loginTitle">Skytale</h1>
-    <div class="loginForm">
-        <form th:action="@{/login}" th:method="POST">
+<p class="errorMessage" th:text="${error}"></p>
+<div class="loginForm">
+    <form th:action="@{/login}" th:method="POST">
             <div class="loginFormComponents">
                 <input class="textLoginFormComponents" name="username" placeholder="username" required/>
                 <input class="textLoginFormComponents" type="password" name="password" placeholder="password" required/>

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -52,7 +53,10 @@ public class WebController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model m, @RequestParam() Map<String, String> param) {
+        if (param.containsKey("error")){
+            m.addAttribute("error", "Error: Invalid credentials.");
+        }
         return "login";
     }
 
