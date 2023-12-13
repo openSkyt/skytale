@@ -8,6 +8,7 @@ import org.openskyt.skytale.models.User;
 import org.openskyt.skytale.repositories.ChatroomRepository;
 import org.openskyt.skytale.repositories.MessageRepository;
 import org.openskyt.skytale.repositories.UserRepository;
+import org.openskyt.skytale.service.ChatroomService;
 import org.openskyt.skytale.service.SseService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,9 +29,13 @@ public class WebController {
     private UserRepository userRepository;
     private SseService sseService;
     private PasswordEncoder passwordEncoder;
+    private ChatroomService chatroomService;
 
     @GetMapping("/")
     public String homePage(Model model) {
+        List <Chatroom> listOfAllRooms = chatroomService.getAll();
+        model.addAttribute("listOfAllRooms", listOfAllRooms);
+
         Optional<Chatroom> chatroomOpt = chatroomRepository.findByName("xChat");
         Chatroom chatroom = chatroomOpt.orElseThrow();
 
@@ -42,7 +47,7 @@ public class WebController {
 
         model.addAttribute("loggedUserName", currentPrincipalName);
 
-        return "chat";
+        return "mainPage";
     }
 
     @GetMapping("/login")
