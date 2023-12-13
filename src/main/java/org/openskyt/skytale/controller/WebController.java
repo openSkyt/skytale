@@ -28,7 +28,7 @@ public class WebController {
         Chatroom chatroom = chatroomService.getById(idOfChatroom);
         model.addAttribute("chatroom", chatroom);
         model.addAttribute("messages", chatroom.getMessagesInRoom().reversed());
-        model.addAttribute("loggedUsername", securityService.getLoggedInUser().getName());
+        model.addAttribute("loggedUserName", securityService.getLoggedInUser().getName());
 
         return "chat";
     }

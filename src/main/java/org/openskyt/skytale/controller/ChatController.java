@@ -22,9 +22,11 @@ public class ChatController {
 
     @PostMapping("/{idOfChatroom}/addMessage")
     public String addMessage(String message, @PathVariable Long idOfChatroom) {
-        User user = securityService.getLoggedInUser();
-        messageService.createMessage(new MessageRequestDto(user.getId(), idOfChatroom, message));
-        sseService.sendMessageEvent(new MessageDto(user.getName(), message));
+        if (message.length() < 255) {
+            User user = securityService.getLoggedInUser();
+            messageService.createMessage(new MessageRequestDto(user.getId(), idOfChatroom, message));
+            sseService.sendMessageEvent(new MessageDto(user.getName(), message));
+        }
         return "redirect:/{idOfChatroom}";
     }
 }

@@ -38,7 +38,7 @@ public class LoginAndRegisterController {
 
     @PostMapping("/register")
     public String registerPost(Model m, Optional<String> username, Optional<String> password) {
-        List<ErrorDto> errorDTOs = Stream.of(
+        /*List<ErrorDto> errorDTOs = Stream.of(
                         username.filter(u -> userService.getByUsername(u).getName()
                                         .contains(u))
                                 .map(u -> new ErrorDto("Error: Username already in use")),
@@ -58,7 +58,7 @@ public class LoginAndRegisterController {
         if (!errors.isEmpty()) {
             m.addAttribute("errors", errors);
             return "register";
-        }
+        }*/
         // TODO refactor this method!
         userService.createUser(new RegistrationRequestDto(username.get(), password.get()));
         return "redirect:/login";
