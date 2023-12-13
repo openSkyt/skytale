@@ -1,6 +1,7 @@
 package org.openskyt.skytale.controller;
 
 import lombok.AllArgsConstructor;
+import org.openskyt.skytale.dto.ErrorDTO;
 import org.openskyt.skytale.dto.MessageDto;
 import org.openskyt.skytale.models.Chatroom;
 import org.openskyt.skytale.models.Message;
@@ -16,8 +17,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 @AllArgsConstructor
@@ -66,14 +72,38 @@ public class WebController {
     }
 
     @GetMapping("/register")
-    public String newUser(){
+    public String newUser() {
         return "register";
     }
 
     @PostMapping("/register")
-    public String newUserPOST(String username, String password){
-        userRepository.save(new User(username, passwordEncoder.encode(password)));
+    public String newUserPOST(Model m, Optional<String> username, Optional<String> password) {
+        List<ErrorDTO> errorDTOs = Stream.of(
+                        username.filter(u -> userRepository.findByName(u)
+                                        .map(User::getName)
+                                        .orElse("")
+                                        .contains(u))
+                                .map(u -> new ErrorDTO("Error: Username already in use")),
+                        username.filter(String::isEmpty)
+                                .map(u -> new ErrorDTO("Error: Missing username")),
+                        password.filter(String::isEmpty)
+                                .map(p -> new ErrorDTO("Error: Missing password"))
+                )
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .toList();
+
+        StringBuilder currentErrors = new StringBuilder();
+        for (ErrorDTO ed : errorDTOs) {
+            currentErrors.append(ed.error()).append("\n");
+        }
+
+        if (!errorDTOs.isEmpty()) {
+            m.addAttribute("errors", currentErrors.toString());
+            return "register";
+        }
+
+        userRepository.save(new User(username.get(), passwordEncoder.encode(password.get())));
         return "redirect:/login";
     }
-
 }
