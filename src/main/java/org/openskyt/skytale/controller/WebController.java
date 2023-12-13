@@ -16,7 +16,6 @@ public class WebController {
     private SecurityService securityService;
     private ChatroomService chatroomService;
 
-
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("loggedInUser", securityService.getLoggedInUser());
@@ -25,7 +24,7 @@ public class WebController {
     }
 
     @GetMapping("/{idOfChatroom}")
-    public String chatroom(@PathVariable Long idOfChatroom, Model model){
+    public String chatroom(@PathVariable Long idOfChatroom, Model model) {
         // TODO find chatroom by ID
         Chatroom chatroom = chatroomService.getById(idOfChatroom);
         model.addAttribute("chatroom", chatroom);
@@ -41,6 +40,6 @@ public class WebController {
         //String currentPrincipalName = authentication.getName();
         //model.addAttribute("loggedUserName", currentPrincipalName);
 
-        return "chat";
+        return "mainPage";
     }
 }

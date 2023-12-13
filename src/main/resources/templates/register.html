@@ -7,14 +7,16 @@
     <title>Register</title>
 </head>
 <body>
+<a class="topRightButton" href="login">Login</a>
     <h1 class="loginTitle">Register to Skytale</h1>
+    <p class="errorMessage" th:unless="${errors.isEmpty()}" th:each="error : ${errors}" th:text="${error}"></p>
 
     <div class="loginForm">
         <form th:action="@{/register}" th:method="POST">
             <div class="loginFormComponents">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                <input class="textLoginFormComponents" name="username" placeholder="username"/>
-                <input class="textLoginFormComponents" type="password" name="password" placeholder="password"/>
+                <input class="textLoginFormComponents" name="username" placeholder="username" required/>
+                <input class="textLoginFormComponents" type="password" name="password" placeholder="password" required/>
                 <input class="buttonLoginFormComponent" type="submit" value="register"/>
             </div>
         </form>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Skytale</title>
+    <link rel="stylesheet" href="/stylesheets/mainPage.css">
+</head>
+<body>
+<header>
+    <h1>Skytale</h1>
+    <a href="/logout">Logout</a>
+</header>
+
+
+
+<main>
+    <div class="sidebar"></div>
+<!--<section class="flex-chatrooms" th:each="chatroom : ${listOfAllRooms}">-->
+<!--    <div class="chatroomShow"  >-->
+<!--        <iframe width="360" height="215" th:src="@{'/' + chatroom.name}" frameborder="1" allowfullscreen></iframe>-->
+<!--    </div>-->
+<!--    <button id="scrollRight">→</button>-->
+<!--</section>-->
+
+    /<!-- ODO - listing chatrooms, but does not show the content. Přístup byl odepřen-->
+    <section class="flex-chatrooms">
+        <div class="chatrooms-container">
+            <div th:each="chatroom : ${listOfAllRooms}" class="chatroomShow">
+                <p th:text="${chatroom.getName()}"></p>
+                <iframe width="360" height="215" th:src="@{'/login' }" frameborder="1" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <button id="scrollRight">→</button>
+    </section>
+
+
+
+
+</main>
+
+<footer>
+
+
+</footer>
+
+
+
+</body>
+</html>

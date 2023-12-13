@@ -22,7 +22,7 @@ public class Message {
     private Timestamp timeStamp;
 
     @ManyToOne
-    private User user;
+    private User author;
 
     @ManyToOne
     private Chatroom chatroom;
@@ -32,5 +32,9 @@ public class Message {
         this.timeStamp = new Timestamp(new Date().getTime());
     }
 
-
+    public Message(User author, Chatroom room, String message) {
+        this.author = author;
+        this.chatroom = room;
+        this.text = message;
+    }
 }
