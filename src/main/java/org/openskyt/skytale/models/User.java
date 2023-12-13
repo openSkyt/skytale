@@ -33,6 +33,9 @@ public class User {
     @ManyToMany(mappedBy = "participants")
     private List<Chatroom> chatrooms = new ArrayList<>();
 
+    @ManyToMany
+    List<User> userContacts=new ArrayList<>();
+
     public User(String name, String password) {
         this.name = name;
         this.password = password;
