@@ -13,6 +13,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
+
 @SpringBootApplication
 @AllArgsConstructor
 public class SkytaleApplication implements CommandLineRunner {
@@ -21,7 +23,6 @@ public class SkytaleApplication implements CommandLineRunner {
     private MessageRepository messageRepository;
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
-
     private ChatroomService chatroomService;
 
     public static void main(String[] args) {
@@ -32,7 +33,7 @@ public class SkytaleApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         User user1 = new User("Dan", passwordEncoder.encode("1234"));
         User user3ownerOfchat = new User("OWNER of chat", passwordEncoder.encode("1234"));
-        User user2 = new User("MarekL",passwordEncoder.encode("1234"));
+        User user2 = new User("MarekL", passwordEncoder.encode("1234"));
         User us3r = new User("admin", passwordEncoder.encode("admin"));
 
         Message message1 = new Message("Ahoj");
@@ -77,6 +78,14 @@ public class SkytaleApplication implements CommandLineRunner {
         messageRepository.save(message2);
 
         //database testing data
+        //database testing for adding contacts
+        user1.setUserContacts(List.of(user2, user3ownerOfchat));
+        us3r.setUserContacts(List.of(user1, user2, user3ownerOfchat));
+        userRepository.save(us3r);
+
+        userRepository.save(user1);
+
+        //database testing for adding contacts
         messageRepository.save(message3);
         messageRepository.save(message4);
         messageRepository.save(message5);
