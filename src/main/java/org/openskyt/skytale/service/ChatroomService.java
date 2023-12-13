@@ -62,4 +62,8 @@ public class ChatroomService {
         return roomRepo.getReferenceById(roomId).getMessagesInRoom();
     }
 
+    public Chatroom getById(Long roomId) {
+        return roomRepo.getReferenceById(roomId);
+    }
+
 }

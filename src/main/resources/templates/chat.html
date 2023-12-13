@@ -4,21 +4,7 @@
     <link rel="stylesheet" href="/stylesheets/chatStyle.css">
     <meta name="viewport" content="width=device-width"/>
     <meta charset="UTF-8">
-    <title>Chat</title>
-
-    <!--<script>
-        let isTextModified = false;
-
-        function onTextChange() {
-            isTextModified = true;
-        }
-
-        setTimeout(function() {
-            if (!isTextModified) {
-                location.reload();
-            }
-        }, 5000);
-    </script>-->
+    <title th:text="${chatroom.getName()}"></title>
 </head>
 <body>
     <div class="wrapper">
@@ -27,11 +13,11 @@
             <a href="/logout">Logout</a>
         </div>
         <div class="chat" id="chat">
-            <div th:each="message : ${messages}" th:attr="class=${message.getUser().getName() == loggedUserName ? 'chatCard card-align-right' : 'chatCard card-align-left'}">
-                <div th:if="${message.getUser().getName() != loggedUserName}" class="chatCardUserContainer">
-                    <span class="chatCardUserText" th:text="${message.getUser().getName()}"></span>
+            <div th:each="message : ${messages}" th:attr="class=${message.getAuthor().getName() == loggedUserName ? 'chatCard card-align-right' : 'chatCard card-align-left'}">
+                <div th:if="${message.getAuthor().getName() != loggedUserName}" class="chatCardUserContainer">
+                    <span class="chatCardUserText" th:text="${message.getAuthor().getName()}"></span>
                 </div>
-                <div th:attr="class=${message.getUser().getName() == loggedUserName ? 'chatCardBackground chatCardBackgroundMe' : 'chatCardBackground chatCardBackgroundAnotherUser'}">
+                <div th:attr="class=${message.getAuthor().getName() == loggedUserName ? 'chatCardBackground chatCardBackgroundMe' : 'chatCardBackground chatCardBackgroundAnotherUser'}">
                     <div class="chatCardTextContainer">
                         <span class="chatCardText" th:text="${message.getText()}"></span>
                     </div>
@@ -57,8 +43,8 @@
             </template>
         </div>
         <div class="actionBar">
-            <form th:action="@{/addMessage}" th:method="POST" class="actionBarForm">
-                <input class="actionBarTextField" type="text" name="message"> <!--oninput="onTextChange()"-->
+            <form th:action="@{/__${chatroom.getId()}__/addMessage}" th:method="POST" class="actionBarForm">
+                <input class="actionBarTextField" type="text" name="message">
                 <button class="submitButton" type="submit" name="sendMessage"><i class="bi bi-send-fill"></i></button>
             </form>
         </div>
@@ -91,6 +77,7 @@
                 // Check whether notification permissions have already been granted;
                 // if so, create a notification
                 const notification = new Notification("Hi there!");
+                alert("Notification");
             } else if (Notification.permission !== "denied") {
                 // We need to ask the user for permission
                 Notification.requestPermission().then((permission) => {
@@ -101,7 +88,6 @@
                 });
             }
         }
-        notifyMe();
     </script>
 </body>
 </html>

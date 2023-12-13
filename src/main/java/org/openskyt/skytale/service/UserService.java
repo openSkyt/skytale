@@ -1,6 +1,6 @@
 package org.openskyt.skytale.service;
 
-import org.openskyt.skytale.dto.RegistrationRequest;
+import org.openskyt.skytale.dto.RegistrationRequestDto;
 import org.openskyt.skytale.models.User;
 import org.openskyt.skytale.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +23,10 @@ public class UserService {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public void createUser(RegistrationRequest dto) {
+    public void createUser(RegistrationRequestDto dto) {
         User newUser = new User(
-                dto.getUsername(),
-                passwordEncoder.encode(dto.getPassword())
+                dto.username(),
+                passwordEncoder.encode(dto.password())
         );
         userRepo.save(newUser);
     }

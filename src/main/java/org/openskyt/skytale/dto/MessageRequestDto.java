@@ -1,13 +1,6 @@
 package org.openskyt.skytale.dto;
 
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
-public class MessageRequestDto {
+public record MessageRequestDto (Long authorId, Long roomId, String message) {
 
-    private Long authorId;
-    private Long roomId;
-    private String message;
 }
