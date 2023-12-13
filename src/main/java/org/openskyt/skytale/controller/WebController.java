@@ -1,6 +1,9 @@
 package org.openskyt.skytale.controller;
 
 import lombok.AllArgsConstructor;
+import org.openskyt.skytale.models.Chatroom;
+import org.openskyt.skytale.security.SecurityService;
+import org.openskyt.skytale.service.ChatroomService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,15 +13,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 @AllArgsConstructor
 public class WebController {
 
+    private SecurityService securityService;
+    private ChatroomService chatroomService;
+
+
     @GetMapping("/")
     public String index(Model model) {
-        // TODO add user to model
+        model.addAttribute("loggedInUser", securityService.getLoggedInUser());
+        model.addAttribute("chatrooms", chatroomService.getAll());
         return "index";
     }
 
     @GetMapping("/{idOfChatroom}")
-    public String chatroom(@PathVariable Long idOfChatroom) {
+    public String chatroom(@PathVariable Long idOfChatroom, Model model){
         // TODO find chatroom by ID
+        Chatroom chatroom = chatroomService.getById(idOfChatroom);
+        model.addAttribute("chatroom", chatroom);
         //Optional<Chatroom> chatroomOpt = chatroomRepository.findByName("xChat");
         //Chatroom chatroom = chatroomOpt.orElseThrow();
 

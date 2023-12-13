@@ -20,7 +20,7 @@ public class LoginAndRegisterController {
 
     @PostMapping("/register")
     public String registerPost(String username, String password){
-        // TODO change to service: userRepository.save(new User(username, passwordEncoder.encode(password)));
+        // TODO get merge from MarekL
         return "redirect:/login";
     }
 }

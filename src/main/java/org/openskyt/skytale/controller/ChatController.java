@@ -1,6 +1,8 @@
 package org.openskyt.skytale.controller;
 
 import lombok.AllArgsConstructor;
+import org.openskyt.skytale.models.User;
+import org.openskyt.skytale.security.SecurityService;
 import org.openskyt.skytale.service.ChatroomService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,12 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 @AllArgsConstructor
 public class ChatController {
 
-    ChatroomService chatroomService;
+    private ChatroomService chatroomService;
+    private SecurityService securityService;
+
     @PostMapping("/{idOfChatroom}/addMessage")
     public String addMessage(String message, @PathVariable Long idOfChatroom) {
-        // TODO get id of loggedInUser from service
-        //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        //String currentPrincipalName = authentication.getName();
+        User user = securityService.getLoggedInUser();
+
 
         // TODO save new message with inputs (idOfChatroom, idOfUser, messageText)
         //Message m = new Message(message);
