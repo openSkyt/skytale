@@ -3,11 +3,7 @@ package org.openskyt.skytale.service;
 import jakarta.transaction.Transactional;
 import org.openskyt.skytale.models.User;
 import org.openskyt.skytale.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ContactService {
@@ -24,6 +20,13 @@ public class ContactService {
         User actualUser = userService.getUserById(actualUserId);
         User newContact = userService.getUserById(newContactId);
         actualUser.getUserContacts().add(newContact);
+        userRepository.save(actualUser);
+    }
+    @Transactional
+    public void deleteContact(Long actualUserId, Long newContactId){
+        User actualUser = userService.getUserById(actualUserId);
+        User newContact = userService.getUserById(newContactId);
+        actualUser.getUserContacts().remove(newContact);
         userRepository.save(actualUser);
     }
 

@@ -108,5 +108,9 @@ public class SkytaleApplication implements CommandLineRunner {
 
 
         contactService.addContact(1L,2L);
+        contactService.addContact(1L,3L);
+        contactService.addContact(1L,4L);
+        contactService.deleteContact(1L,2L);
+
     }
 }
