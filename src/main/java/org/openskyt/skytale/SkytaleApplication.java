@@ -106,11 +106,5 @@ public class SkytaleApplication implements CommandLineRunner {
         System.out.println(chatroomService.getAll());
         System.out.println(chatroomService.getByParticipantId(1L));
 
-
-        contactService.addContact(1L,2L);
-        contactService.addContact(1L,3L);
-        contactService.addContact(1L,4L);
-        contactService.deleteContact(1L,2L);
-
     }
 }
