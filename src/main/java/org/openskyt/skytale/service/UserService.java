@@ -46,7 +46,6 @@ public class UserService {
         return userRepo.getReferenceById(userId);
     }
 
-
     public User getByUsername(String username) {
         return userRepo.findByName(username).orElse(null);
     }

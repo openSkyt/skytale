@@ -1,5 +1,6 @@
 package org.openskyt.skytale.service;
 
+import jakarta.transaction.Transactional;
 import org.openskyt.skytale.dto.MessageRequestDto;
 import org.openskyt.skytale.models.Message;
 import org.openskyt.skytale.repositories.ChatroomRepository;
@@ -24,7 +25,7 @@ public class MessageService {
         this.chatroomRepo = chatroomRepo;
     }
 
-
+    @Transactional
     public void createMessage(MessageRequestDto dto) {
         Message message = new Message(
                 userRepo.getReferenceById(dto.authorId()),

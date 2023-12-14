@@ -6,7 +6,6 @@ import org.openskyt.skytale.dto.SseMessageDto;
 import org.openskyt.skytale.models.SseSubscriber;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -14,7 +13,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Service
 public class SseService {
     private final List<SseSubscriber> emitters = new CopyOnWriteArrayList<>();
-    private ChatroomService chatroomService;
+    private final ChatroomService chatroomService;
 
     public SseService(ChatroomService chatroomService) {
         this.chatroomService = chatroomService;
@@ -30,7 +29,7 @@ public class SseService {
         for (SseSubscriber emitter : emitters) {
             try {
                 if (chatroomService.checkIfParticipantExists(emitter.user().getId(), sseMessageDto.idOfChatroom())) {
-                    MessageDto messageDto = new MessageDto(sseMessageDto.user().getName(), sseMessageDto.msgText());
+                    MessageDto messageDto = new MessageDto(sseMessageDto.user().getName(), sseMessageDto.msgText(), sseMessageDto.idOfChatroom());
                     emitter.sseEmitter().send((new ObjectMapper()).writeValueAsString(messageDto), MediaType.APPLICATION_JSON);
                 }
             } catch (IOException e) {

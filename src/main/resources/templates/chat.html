@@ -12,7 +12,7 @@
             <a href="javascript:void(0);" onclick="notifyMe()">Notifikace</a>
             <a href="/logout">Logout</a>
         </div>
-        <div class="chat" id="chat">
+        <div class="chat" th:id="'chat' + ${chatroom.getId()}">
             <div th:each="message : ${messages}" th:attr="class=${message.getAuthor().getName() == loggedUserName ? 'chatCard card-align-right' : 'chatCard card-align-left'}">
                 <div th:if="${message.getAuthor().getName() != loggedUserName}" class="chatCardUserContainer">
                     <span class="chatCardUserText" th:text="${message.getAuthor().getName()}"></span>
@@ -60,7 +60,7 @@
             const clone = template.content.cloneNode(true);
             clone.querySelector(".chatCardUserText").textContent = receivedMessage.msgUserName;
             clone.querySelector(".chatCardText").textContent = receivedMessage.msgText;
-            document.querySelector("#chat").prepend(clone);
+            document.querySelector("#chat" + receivedMessage.idOfChatroom).prepend(clone);
         };
 
         eventSource.onerror = (error) => {

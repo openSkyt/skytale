@@ -66,6 +66,7 @@ public class ChatroomService {
         return roomRepo.getReferenceById(roomId).getMessagesInRoom();
     }
 
+    @Transactional
     public Chatroom getById(Long roomId) {
         return roomRepo.getReferenceById(roomId);
     }
