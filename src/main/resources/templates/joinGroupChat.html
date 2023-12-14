@@ -1,40 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org/" lang="en">
 <head>
-    <link rel="stylesheet" href="/stylesheets/newGroupChatStyle.css">
+    <link rel="stylesheet" href="/stylesheets/iFrameChatroomCreateJoinStyle.css">
     <meta charset="UTF-8">
     <title>Title</title>
 
 </head>
 <body>
-<h1>Join a group chat</h1>
+<div class="container">
+    <h1>Join a group chat</h1>
 
-<form th:action="@{/joinchat}" name="" method="post">
-    <p>Group name:
-    </p>
+    <form th:action="@{/joinchat}" name="" method="post">
+        <p>Group name:
+        </p>
 
-    <div id="list1" class="dropdown-check-list" tabindex="100">
-        <span class="anchor">Select chat</span>
-        <ul th:each="chatroom : ${chatrooms}" class="items">
-            <li>
-                <input name="chatroomID" th:value="${chatroom.getId()}" type="checkbox"/>
-                <span th:text="${chatroom.getName()}"></span>
-            </li>
-        </ul>
-    </div>
+        <div id="list1" class="dropdown-check-list" tabindex="100">
+            <span class="anchor">Select chat</span>
+            <ul th:each="chatroom : ${chatrooms}" class="items">
+                <li>
+                    <input name="chatroomID" th:value="${chatroom.getId()}" type="checkbox"/>
+                    <span th:text="${chatroom.getName()}"></span>
+                </li>
+            </ul>
+        </div>
 
-    <script>
-        var checkList = document.getElementById('list1');
-        checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
-            if (checkList.classList.contains('visible'))
-                checkList.classList.remove('visible');
-            else
-                checkList.classList.add('visible');
-        }
-    </script>
+        <button type="submit">Join</button>
 
-    <button type="submit">Join</button>
-</form>
+        <script>
+            var checkList = document.getElementById('list1');
+            checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
+                if (checkList.classList.contains('visible'))
+                    checkList.classList.remove('visible');
+                else
+                    checkList.classList.add('visible');
+            }
+        </script>
+
+
+    </form>
+</div>
 
 
 </body>
