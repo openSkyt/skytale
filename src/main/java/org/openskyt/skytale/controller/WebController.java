@@ -2,6 +2,7 @@ package org.openskyt.skytale.controller;
 
 import lombok.AllArgsConstructor;
 import org.openskyt.skytale.models.Chatroom;
+import org.openskyt.skytale.models.User;
 import org.openskyt.skytale.security.SecurityService;
 import org.openskyt.skytale.service.ChatroomService;
 import org.openskyt.skytale.service.UserService;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -41,7 +44,11 @@ public class WebController {
 
     @GetMapping("/newgroupchat")
     public String newGroupChatGET(Model m) {
-        m.addAttribute("users", userService.getAll());
+        List<User> users = new ArrayList<>(userService.getAll());
+        users.remove(securityService.getLoggedInUser());
+        //above - removing currently logged user, so they don't add themselves again into the room
+        //TODO - optimize and handle this inside the service pls, thx
+        m.addAttribute("users", users);
         return "newGroupChat";
     }
 
