@@ -3,6 +3,7 @@ package org.openskyt.skytale.controller;
 import lombok.AllArgsConstructor;
 import org.openskyt.skytale.dto.MessageDto;
 import org.openskyt.skytale.dto.MessageRequestDto;
+import org.openskyt.skytale.dto.SseMessageDto;
 import org.openskyt.skytale.models.User;
 import org.openskyt.skytale.security.SecurityService;
 import org.openskyt.skytale.service.ChatroomService;
@@ -25,7 +26,7 @@ public class ChatController {
         if (message.length() < 255) {
             User user = securityService.getLoggedInUser();
             messageService.createMessage(new MessageRequestDto(user.getId(), idOfChatroom, message));
-            sseService.sendMessageEvent(new MessageDto(user.getName(), message));
+            sseService.sendMessageEvent(new SseMessageDto(user, message, idOfChatroom));
         }
         return "redirect:/{idOfChatroom}";
     }

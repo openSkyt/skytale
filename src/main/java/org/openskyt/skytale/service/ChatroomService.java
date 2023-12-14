@@ -46,6 +46,10 @@ public class ChatroomService {
         roomReference.getParticipants().add(userReference);
     }
 
+    public boolean checkIfParticipantExists(Long userId, Long chatroomId) {
+        return roomRepo.existsByIdAndParticipants_Id(chatroomId, userId);
+    }
+
     public List<Chatroom> getAll() {
         return roomRepo.findAll();
     }
