@@ -7,7 +7,7 @@
     <title>Register</title>
 </head>
 <body>
-<a class="topRightButton" href="login">Login</a>
+    <a class="topRightButton" th:href="@{/login}">Login</a>
     <h1 class="loginTitle">Register to Skytale</h1>
     <p class="errorMessage" th:unless="${errors.isEmpty()}" th:each="error : ${errors}" th:text="${error}"></p>
 

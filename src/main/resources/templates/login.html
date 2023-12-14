@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<a class="topRightButton" href="register">Register</a>
+<a class="topRightButton" th:href="@{/register}">Register</a>
 <h1 class="loginTitle">Skytale</h1>
 <p class="errorMessage" th:if="${param.containsKey('error')}" th:text="${error}"></p>
 <div class="loginForm">
