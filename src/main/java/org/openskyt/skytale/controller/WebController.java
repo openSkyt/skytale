@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Controller
@@ -28,9 +29,13 @@ public class WebController {
 
     @GetMapping("/")
     public String index(Model model) {
-        User loggedInUser = securityService.getLoggedInUser();
-        model.addAttribute("loggedInUser", loggedInUser);
-        model.addAttribute("chatrooms", chatroomService.getByParticipantId(loggedInUser.getId()));
+        try {
+            User loggedInUser = securityService.getLoggedInUser();
+            model.addAttribute("loggedInUser", loggedInUser);
+            model.addAttribute("chatrooms", chatroomService.getByParticipantId(loggedInUser.getId()));
+        } catch (NoSuchElementException e) {
+            return "redirect:/login";
+        }
         return "index";
     }
 

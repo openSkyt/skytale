@@ -20,7 +20,7 @@ public class SseController {
 
     @GetMapping(path = "/sse", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public SseEmitter subscribe() {
-        SseEmitter emitter = new SseEmitter(Long.MAX_VALUE);
+        SseEmitter emitter = new SseEmitter(30000L);
         SseSubscriber sseSubscriber = new SseSubscriber(emitter, securityService.getLoggedInUser());
         sseService.addEmitter(sseSubscriber);
         return emitter;

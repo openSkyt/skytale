@@ -50,7 +50,7 @@ public class UserService {
     }
 
     public User getByUsername(String username) {
-        return userRepo.findByName(username).orElse(null);
+        return userRepo.findByName(username).orElseThrow();
     }
 
     public Optional<User> getOptionalByUsername(String username) {
