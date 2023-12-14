@@ -6,22 +6,35 @@
     <link rel="stylesheet" href="/stylesheets/mainPage.css">
 </head>
 <body>
-    <header class="header">
-        <h1 class="h1">Skytale</h1>
-        <a class="topRightButton" th:href="@{/logout}">Logout</a>
-        <span class="userName" th:text="${loggedInUser.getName()}"></span>
-    </header>
-    <main>
-        <section class="chatRoomsSection">
-            <div class="chatRoomsContainer">
-                <div th:each="chatroom : ${chatrooms}" class="chatRoomCard">
-                    <div class="chatRoomCardTitle">
-                        <a th:href="@{/__${chatroom.getId()}__}" th:text="${chatroom.getName()}" class="chatroomCardLink"></a>
-                    </div>
-                    <iframe class="frame" th:src="@{'/' + ${chatroom.getId()}}" scrolling="no"></iframe>
+<header class="header">
+    <h1 class="h1">Skytale</h1>
+    <a class="topRightButton" th:href="@{/logout}">Logout</a>
+    <span class="userName" th:text="${loggedInUser.getName()}"></span>
+</header>
+<main>
+    <section class="chatRoomsSection">
+        <div class="chatRoomsContainer">
+            <div th:each="chatroom : ${chatrooms}" class="chatRoomCard">
+                <div class="chatRoomCardTitle">
+                    <a th:href="@{/__${chatroom.getId()}__}" th:text="${chatroom.getName()}"
+                       class="chatroomCardLink"></a>
                 </div>
+                <iframe class="frame" th:src="@{'/' + ${chatroom.getId()}}" scrolling="no"></iframe>
             </div>
-        </section>
-    </main>
+            <div class="chatroomCard">
+                <div class="chatRoomCardTitle">
+                    <p class="chatroomCardLink" style="min-height: 1.2rem"> </p>
+                </div>
+                <iframe th:src="@{/stylesheets/plusSignNewChat.html}" class="plusFrame"></iframe>
+            </div>
+            <div class="chatroomCard">
+                <div class="chatRoomCardTitle">
+                    <p class="chatroomCardLink" style="min-height: 1.2rem"></p>
+                </div>
+                <iframe th:src="@{/stylesheets/plusSignJoinChat.html}" class="plusFrame"></iframe>
+            </div>
+        </div>
+    </section>
+</main>
 </body>
 </html>

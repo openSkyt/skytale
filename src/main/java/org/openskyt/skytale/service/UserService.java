@@ -1,5 +1,6 @@
 package org.openskyt.skytale.service;
 
+import jakarta.transaction.Transactional;
 import org.openskyt.skytale.dto.RegistrationRequestDto;
 import org.openskyt.skytale.models.User;
 import org.openskyt.skytale.repositories.UserRepository;
@@ -41,12 +42,15 @@ public class UserService {
     }
 
     // TODO create dto
-    public User getById(Long userId) {
-        return userRepo.getReferenceById(userId);
+//    public User getById(Long userId) {
+//        return userRepo.getReferenceById(userId);
+//    }
+    public User getUserById(Long userId) {
+        return userRepo.findById(userId).orElse(null);
     }
 
     public User getByUsername(String username) {
-        return userRepo.findByName(username).orElse(null);
+        return userRepo.findByName(username).orElseThrow();
     }
 
     public Optional<User> getOptionalByUsername(String username) {

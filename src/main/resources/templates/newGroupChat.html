@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<head>
+    <link rel="stylesheet" href="/stylesheets/iFrameChatroomCreateJoinStyle.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div class="container">
+<h1>New group chat</h1>
+
+<form class="formclass" th:action="@{/newgroupchat}" name="" method="post">
+    <p>Group name:
+        <input name="groupName" type="text">
+    </p>
+
+<div id="list1" class="dropdown-check-list" tabindex="100">
+    <span class="anchor">Select users</span>
+    <ul th:each="user : ${users}" class="items">
+        <li>
+            <input name="groupUsers" th:value="${user.getId()}" type="checkbox"/>
+            <span th:text="${user.getName()}"></span>
+        </li>
+    </ul>
+</div>
+
+    <button type="submit">Create</button>
+
+<script>
+    var checkList = document.getElementById('list1');
+    checkList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+        if (checkList.classList.contains('visible'))
+            checkList.classList.remove('visible');
+        else
+            checkList.classList.add('visible');
+    }
+</script>
+
+
+
+</form>
+</div>
+
+
+</body>
+</html>
