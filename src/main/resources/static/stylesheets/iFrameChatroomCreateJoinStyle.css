@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+
+
 * {
     font-size: 100%;
     font-family: 'Inter', sans-serif;
@@ -8,8 +10,15 @@
     box-sizing: border-box;
 }
 
+.container {
+margin: auto auto;
+}
+
 body {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
 
@@ -17,10 +26,21 @@ h1 {
 
 }
 
+.formclass {
+    position: relative;
+}
+
+button {
+    position: absolute;
+    margin: 0.25rem;
+}
 
 /*START OF DROPDOWN CSS SETTINGS*/
 .dropdown-check-list {
     display: inline-block;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 
 .dropdown-check-list .anchor {
@@ -61,6 +81,7 @@ h1 {
 
 .dropdown-check-list ul.items li {
     list-style: none;
+    text-align: left;
 }
 
 .dropdown-check-list.visible .anchor {
@@ -70,5 +91,6 @@ h1 {
 .dropdown-check-list.visible .items {
     display: block;
 }
+
 
 /*END OF DROPDOWN CSS SETTINGS*/

@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org/" lang="en">
 <head>
-    <link rel="stylesheet" href="/stylesheets/newGroupChatStyle.css">
+    <link rel="stylesheet" href="/stylesheets/iFrameChatroomCreateJoinStyle.css">
     <meta charset="UTF-8">
     <title>Title</title>
 
 </head>
 <body>
+<div class="container">
 <h1>New group chat</h1>
 
-<form th:action="@{/newgroupchat}" name="" method="post">
-    <label>Group name:
+<form class="formclass" th:action="@{/newgroupchat}" name="" method="post">
+    <p>Group name:
         <input name="groupName" type="text">
-    </label>
+    </p>
 
 <div id="list1" class="dropdown-check-list" tabindex="100">
     <span class="anchor">Select users</span>
@@ -24,6 +25,8 @@
     </ul>
 </div>
 
+    <button type="submit">Create</button>
+
 <script>
     var checkList = document.getElementById('list1');
     checkList.getElementsByClassName('anchor')[0].onclick = function(evt) {
@@ -34,9 +37,10 @@
     }
 </script>
 
-    <button type="submit">Create</button>
-</form>
 
+
+</form>
+</div>
 
 
 </body>

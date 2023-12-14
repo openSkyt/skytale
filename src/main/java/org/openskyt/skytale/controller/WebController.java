@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
@@ -44,15 +45,26 @@ public class WebController {
     }
 
     @GetMapping("/joinchat")
-    public String joinChatGET(Model m){
-        m.addAttribute("chatrooms", chatroomService.getAll());
+    public String joinChatGET(Model m) {
+        User loggedInUser = securityService.getLoggedInUser();
+        List<Chatroom> AllChatrooms = new ArrayList<>(chatroomService.getAll());
+        List<Chatroom> AllChatroomsPerUser = new ArrayList<>(chatroomService.getByParticipantId(loggedInUser.getId()));
+        AllChatrooms.removeAll(AllChatroomsPerUser);
+        //TODO JPA version
+
+        m.addAttribute("chatrooms", AllChatrooms);
         return "joinGroupChat";
     }
 
     @PostMapping("/joinchat")
-    public String joinChatPOST(Long chatroomID){
-        chatroomService.addParticipant(chatroomID, securityService.getLoggedInUser().getId());
-        return "redirect:/"+chatroomID;
+    public String joinChatPOST(Long[] chatroomID) {
+        User loggedInUser = securityService.getLoggedInUser();
+
+        for (Long i : chatroomID) {
+            chatroomService.addParticipant(i, loggedInUser.getId());
+        }
+
+        return "redirect:/" + chatroomID[0];
     }
 
     @GetMapping("/newgroupchat")
@@ -66,17 +78,18 @@ public class WebController {
     }
 
     @PostMapping("/newgroupchat")
-    public String newGroupChatPOST(String groupName, Long[] groupUsers) {
+    public String newGroupChatPOST(String groupName, Optional<Long[]> groupUsers) {
         Long id = chatroomService.createRoom(securityService.getLoggedInUser().getId(), groupName).getId();
         chatroomService.addParticipant(id, securityService.getLoggedInUser().getId()); //adds the owner as a participant
 
-        for (Long i:groupUsers){
-            chatroomService.addParticipant(id, i);
+        if (groupUsers.isPresent()) {
+            for (Long i : groupUsers.get()) {
+                chatroomService.addParticipant(id, i);
+            }
         }
 
-        return "redirect:/"+id;
+        return "redirect:/" + id;
     }
-
 
 
 }
