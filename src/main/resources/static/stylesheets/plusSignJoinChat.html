@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-<html  lang="en">
+<html lang="en">
 <head>
     <style>
-        body {
+        body, .container {
             margin: 0;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f0f0f0;
         }
 
         .big-plus {
             text-decoration: none;
             font-size: 10rem;
-            color: #333;
+            color: black;
+        }
+
+        .text {
+            text-align: center;
+            margin-top: 10px; /* Adjust the margin as needed */
         }
     </style>
     <meta charset="UTF-8">
@@ -22,7 +27,9 @@
     <link rel="stylesheet" href="mainPage.css">
 </head>
 <body>
-<a href="/newgroupchat" class="big-plus">+</a>
-<p>Add a new group chat</p>
+<div class="container">
+    <a href="/joinchat" class="big-plus">+</a>
+    <p class="text">Join a new group chat</p>
+</div>
 </body>
 </html>
