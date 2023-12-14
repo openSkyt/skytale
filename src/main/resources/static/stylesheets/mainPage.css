@@ -75,6 +75,11 @@ header::before {
     border-top-left-radius: 0.4rem;
 }
 
+.chatroomCardLink {
+    color: #f7f7f7;
+    text-decoration: none;
+}
+
 .topRightButton {
     text-decoration: none;
     margin: 0.25rem;

@@ -42,6 +42,7 @@ public class SecurityConfig {
                         r.requestMatchers("/stylesheets/**", "/scripts/**", "/login", "/register", "/sse").permitAll();
                         r.anyRequest().authenticated();
                 })
+                // TODO allow only from our domain
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .build();
     }

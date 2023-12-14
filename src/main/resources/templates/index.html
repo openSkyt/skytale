@@ -15,7 +15,9 @@
         <section class="chatRoomsSection">
             <div class="chatRoomsContainer">
                 <div th:each="chatroom : ${chatrooms}" class="chatRoomCard">
-                    <p th:text="${chatroom.getName()}" class="chatRoomCardTitle"></p>
+                    <div class="chatRoomCardTitle">
+                        <a th:href="@{/__${chatroom.getId()}__}" th:text="${chatroom.getName()}" class="chatroomCardLink"></a>
+                    </div>
                     <iframe class="frame" th:src="@{'/' + ${chatroom.getId()}}" scrolling="no"></iframe>
                 </div>
             </div>
