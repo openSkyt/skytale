@@ -27,8 +27,9 @@ public class WebController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("loggedInUser", securityService.getLoggedInUser());
-        model.addAttribute("chatrooms", chatroomService.getAll());
+        User loggedInUser = securityService.getLoggedInUser();
+        model.addAttribute("loggedInUser", loggedInUser);
+        model.addAttribute("chatrooms", chatroomService.getByParticipantId(loggedInUser.getId()));
         return "index";
     }
 
@@ -40,6 +41,18 @@ public class WebController {
         model.addAttribute("loggedUserName", securityService.getLoggedInUser().getName());
 
         return "chat";
+    }
+
+    @GetMapping("/joinchat")
+    public String joinChatGET(Model m){
+        m.addAttribute("chatrooms", chatroomService.getAll());
+        return "joinGroupChat";
+    }
+
+    @PostMapping("/joinchat")
+    public String joinChatPOST(Long chatroomID){
+        chatroomService.addParticipant(chatroomID, securityService.getLoggedInUser().getId());
+        return "redirect:/"+chatroomID;
     }
 
     @GetMapping("/newgroupchat")
@@ -63,5 +76,7 @@ public class WebController {
 
         return "redirect:/"+id;
     }
+
+
 
 }

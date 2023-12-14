@@ -1,3 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+    font-size: 100%;
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+    margin-bottom: 0.5rem;
+    box-sizing: border-box;
+}
+
+body {
+    display: block;
+    text-align: center;
+}
+
+h1 {
+
+}
+
+
+/*START OF DROPDOWN CSS SETTINGS*/
 .dropdown-check-list {
     display: inline-block;
 }
@@ -49,3 +70,5 @@
 .dropdown-check-list.visible .items {
     display: block;
 }
+
+/*END OF DROPDOWN CSS SETTINGS*/
