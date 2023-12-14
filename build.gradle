@@ -47,43 +47,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-    //dependencies for e2e tests
-//    e2eTestImplementation(platform('org.junit:junit-bom:5.9.2'))
-//    e2eTestImplementation('org.junit.jupiter:junit-jupiter')
-//    e2eTestImplementation('org.assertj:assertj-core:3.24.2')
-//    e2eTestImplementation('com.fasterxml.jackson.core:jackson-databind:2.14.2')
-//    e2eTestImplementation('com.microsoft.playwright:playwright:1.32.0')
     implementation group: 'com.microsoft.playwright', name: 'playwright', version: '1.32.0'
-
 }
-
-//e2e tests lines 59-84
-//tasks.register('e2eTest', Test) {
-//    description = 'Runs e2e tests.'
-//    group = 'verification'
-//
-//    testClassesDirs = sourceSets.e2eTest.output.classesDirs
-//    classpath = sourceSets.e2eTest.runtimeClasspath
-//    shouldRunAfter test
-//}
-
-//test {
-//    useJUnitPlatform()
-//    testLogging {
-//        events = ["PASSED", "FAILED", "SKIPPED"]
-//        showStandardStreams = true
-//        exceptionFormat = "full"
-//    }
-//}
-//
-//e2eTest {
-//    useJUnitPlatform()
-//    testLogging {
-//        events = ["PASSED", "FAILED", "SKIPPED"]
-//        showStandardStreams = true
-//        exceptionFormat = "full"
-//    }
-//}
 
 tasks.named('test') {
     useJUnitPlatform()
