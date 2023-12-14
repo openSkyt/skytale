@@ -1,6 +1,8 @@
 package org.openskyt.skytale;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.openskyt.skytale.models.Chatroom;
 import org.openskyt.skytale.models.Message;
 import org.openskyt.skytale.models.User;
@@ -17,15 +19,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.List;
 
 @SpringBootApplication
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SkytaleApplication implements CommandLineRunner {
 
-    private ChatroomRepository chatroomRepository;
-    private MessageRepository messageRepository;
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
-    private ChatroomService chatroomService;
-    private ContactService contactService;
+    private final ChatroomRepository chatroomRepository;
+    private final MessageRepository messageRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final ChatroomService chatroomService;
 
     public static void main(String[] args) {
         SpringApplication.run(SkytaleApplication.class, args);
