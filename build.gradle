@@ -21,18 +21,6 @@ repositories {
     mavenCentral()
 }
 
-//sourceSets nad configurations for e2e tests
-sourceSets {
-    e2eTest {
-        compileClasspath += sourceSets.main.output
-        runtimeClasspath += sourceSets.main.output
-    }
-}
-
-configurations {
-    e2eTestImplementation.extendsFrom implementation
-    e2eTestRuntimeOnly.extendsFrom runtimeOnly
-}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
