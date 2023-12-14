@@ -8,6 +8,7 @@ import org.openskyt.skytale.repositories.ChatroomRepository;
 import org.openskyt.skytale.repositories.MessageRepository;
 import org.openskyt.skytale.repositories.UserRepository;
 import org.openskyt.skytale.service.ChatroomService;
+import org.openskyt.skytale.service.ContactService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,6 +25,7 @@ public class SkytaleApplication implements CommandLineRunner {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
     private ChatroomService chatroomService;
+    private ContactService contactService;
 
     public static void main(String[] args) {
         SpringApplication.run(SkytaleApplication.class, args);
@@ -79,9 +81,9 @@ public class SkytaleApplication implements CommandLineRunner {
 
         //database testing data
         //database testing for adding contacts
-        user1.setUserContacts(List.of(user2, user3ownerOfchat));
-        us3r.setUserContacts(List.of(user1, user2, user3ownerOfchat));
-        userRepository.save(us3r);
+//        user1.setUserContacts(List.of(user2, user3ownerOfchat));
+//        us3r.setUserContacts(List.of(user1, user2, user3ownerOfchat));
+//        userRepository.save(us3r);
 
         userRepository.save(user1);
 
@@ -103,5 +105,8 @@ public class SkytaleApplication implements CommandLineRunner {
 
         System.out.println(chatroomService.getAll());
         System.out.println(chatroomService.getByParticipantId(1L));
+
+
+        contactService.addContact(1L,2L);
     }
 }
