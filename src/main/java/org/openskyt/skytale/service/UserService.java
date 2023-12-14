@@ -1,5 +1,6 @@
 package org.openskyt.skytale.service;
 
+import jakarta.transaction.Transactional;
 import org.openskyt.skytale.dto.RegistrationRequestDto;
 import org.openskyt.skytale.models.User;
 import org.openskyt.skytale.repositories.UserRepository;
