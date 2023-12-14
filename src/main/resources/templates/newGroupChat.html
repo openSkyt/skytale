@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<head>
+    <link rel="stylesheet" href="/stylesheets/newGroupChatStyle.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<h1>New group chat</h1>
+
+<form th:action="@{/newgroupchat}" name="" method="post">
+    <label>Group name:
+        <input name="groupName" type="text">
+    </label>
+
+<div id="list1" class="dropdown-check-list" tabindex="100">
+    <span class="anchor">Select users</span>
+    <ul th:each="user : ${users}" class="items">
+        <li>
+            <input name="groupUsers" th:value="${user.getId()}" type="checkbox"/>
+            <span th:text="${user.getName()}"></span>
+        </li>
+    </ul>
+</div>
+
+<script>
+    var checkList = document.getElementById('list1');
+    checkList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+        if (checkList.classList.contains('visible'))
+            checkList.classList.remove('visible');
+        else
+            checkList.classList.add('visible');
+    }
+</script>
+
+    <button type="submit">Create</button>
+</form>
+
+
+
+</body>
+</html>
